@@ -2,7 +2,7 @@
 // Copyright (C) 2010 AsNet Co., Ltd.
 // All Rights Reserved. These instructions, statements, computer
 // programs, and/or related material (collectively, the "Source")
-// contain unpublished information propietary to AsNet Co., Ltd
+// contain unpublished information proprietary to AsNet Co., Ltd
 // which is protected by US federal copyright law and by 
 // international treaties. This Source may NOT be disclosed to 
 // third parties, or be copied or duplicated, in whole or in 
@@ -20,14 +20,19 @@
 namespace TextHelper
 {
 	/**
-	 *
+	 * Open file in the path, read content and store to a char pointer
+	 * @param pPath		: path of text file
+	 * @return			: char pointer that used to store content of text file
 	 */
-	void ReadFile(void);
+	char* ReadFile(char *pPath);
 
 	/**
-	 *
+	 * Create a file follow path and write source on it
+	 * @param pPath		: path of new file
+	 * @param pSource 	: content that used to write on new file
+	 * @return			: status
 	 */
-	void WriteFile(void);
+	int WriteFile(char *pPath, char *pSource);
 }
 
 #endif // APP_COMMON_TEXTHELPER_H
