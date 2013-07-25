@@ -11,5 +11,74 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "package.h"
+
+namespace TextHelper
+{
+	/**
+	 *
+	 */
+	char* ReadFile(char *pPath)
+	{
+		FILE *file;
+		char *content = NULL;
+		
+		int count = 0;
+		
+		// Open file if the path is not null
+		if (pPath != NULL)
+			file = fopen(pPath, "rt");
+		else
+			printf("ERROR: Path not exist!");
+			
+		if (file != NULL)
+		{
+			fseek(file, 0, SEEK_END);
+			count = ftell(file);
+			rewind(file);
+			if (count > 0)
+			{
+				content = (char *)malloc(sizeof(char) * (count+1));
+				count = fread(content, sizeof(char), count, file);
+				content[count] = '\0';
+			}
+			fclose(file);
+		}
+		else
+		{
+			printf("ERROR: File not found!");
+		}
+		
+		return content;
+	}
+
+	/**
+	 *
+	 */
+	int WriteFile(char *pPath, char *pSource)
+	{
+		FILE *file;
+		int status = 0;
+		
+		// Create new file if the path is not null
+		if (pPath != NULL)
+		{
+			file = fopen(pPath, "w");
+			
+			if (file != NULL)
+			{
+				if (fwrite(pSource,sizeof(char),strlen(pSource),file) == strlen(pSource))
+					status = 1;
+				fclose(file);
+			}			
+		}
+		else
+		{
+			printf("ERROR: Path not exist!");
+		}
+		
+		return status;
+	}
+};
 
 ///////////////////////////////////////////////////////////////////////////////

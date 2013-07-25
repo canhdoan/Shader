@@ -24,8 +24,10 @@
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
-using std::ifstream;
 #include <sstream>
+#include <string.h>
+
+using std::ifstream;
 using std::ostringstream;
 
 #include <glm/glm.hpp>
