@@ -11,29 +11,27 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_COMMON_SHADER_H
-#define APP_COMMON_SHADER_H
+#include "package.h"
 
-/**
- * Define all function to use for prepare shader program, include :
- * + Load shader(vertex and fragment) from text file
- * + Compile shader
- * + Link to shader program
- *
- */
-namespace Shader
+///////////////////////////////////////////////////////////////////////////////
+
+SingleLight::SingleLight(void)
 {
-	/**
-	 * Method load shader to create vertex & fragment shader, compile it and link to
-	 * shader programe
-	 * @param pVertexFile	: path of vertex shader text file
-	 * @param pFragFile		: path of fragment shader text file
-	 * @param programID		: shader program will return to use
-	 */
-	void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID);
-};
 
+}
 
-#endif // APP_COMMON_SHADER_H
+///////////////////////////////////////////////////////////////////////////////
+
+SingleLight::~SingleLight(void)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SingleLight::Construct(void)
+{
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////

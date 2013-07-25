@@ -11,29 +11,24 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_COMMON_SHADER_H
-#define APP_COMMON_SHADER_H
+#ifndef APP_COMMON_LOAD3DOBJ_H
+#define APP_COMMON_LOAD3DOBJ_H
 
-/**
- * Define all function to use for prepare shader program, include :
- * + Load shader(vertex and fragment) from text file
- * + Compile shader
- * + Link to shader program
- *
- */
-namespace Shader
+namespace Load3DObj
 {
 	/**
-	 * Method load shader to create vertex & fragment shader, compile it and link to
-	 * shader programe
-	 * @param pVertexFile	: path of vertex shader text file
-	 * @param pFragFile		: path of fragment shader text file
-	 * @param programID		: shader program will return to use
+	 * Load 3D model from file *.3ds format, result is stored to 3DS object
+	 * struct that it is defined in the package file.
 	 */
-	void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID);
+	void Load3dsModel();
+
+	/**
+	 * Load 3D model from file *.obj format, result is stored to object struct 
+	 * that it is defined in the package file
+	 */
+	void LoadObjModel();
 };
 
-
-#endif // APP_COMMON_SHADER_H
+#endif // APP_COMMON_LOAD3DOBJ_H
 
 ///////////////////////////////////////////////////////////////////////////////
