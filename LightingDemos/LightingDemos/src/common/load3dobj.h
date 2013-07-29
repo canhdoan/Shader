@@ -18,15 +18,34 @@ namespace Load3DObj
 {
 	/**
 	 * Load 3D model from file *.3ds format, result is stored to 3DS object
-	 * struct that it is defined in the package file.
+	 * structure that it is defined in the package file.
+	 *
+	 * @param pFileName		: the .3ds file to need load
+	 * @param pObject		: the 3ds object structure
 	 */
-	void Load3dsModel();
+	void Load3dsModel(char *pFileName, OBJECT_3DS_PTR pObject);
 
 	/**
-	 * Load 3D model from file *.obj format, result is stored to object struct 
+	 * Load 3D model from file *.obj format, result is stored to object structure 
 	 * that it is defined in the package file
 	 */
-	void LoadObjModel();
+	void LoadObjModel(void);
+	
+	/**
+	 * Calculate normal vector
+	 */
+	void CalcNormalVector(void);
+	
+	/**
+	 * Calculate tangent vector
+	 */
+	void CalcTangentVector(void);
+	 
+	/**
+	 * Calculate bitangent(binormal) vector
+	 */
+	void CalcBiTangentVector(void);
+	
 };
 
 #endif // APP_COMMON_LOAD3DOBJ_H

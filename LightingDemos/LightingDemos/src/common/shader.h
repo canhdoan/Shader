@@ -21,8 +21,16 @@
  * + Link to shader program
  *
  */
-namespace Shader
+namespace GLSLShader
 {
+	enum GLSLShaderType
+	{
+		VERTEX = 0,
+		FRAGMENT,
+		GEOMETRY,
+		TESS_CONTROL,
+		TESS_EVALUATION
+	};
 	/**
 	 * Method load shader to create vertex & fragment shader, compile it and link to
 	 * shader programe
@@ -30,8 +38,102 @@ namespace Shader
 	 * @param pFragFile		: path of fragment shader text file
 	 * @param programID		: shader program will return to use
 	 */
-	void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID);
+	//void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID);
 };
+
+/**
+ * Define Shader class to support for work with shader program in OpenGL.
+ * This class will support load a shader source from file, compile shader program
+ * linking and release all resource if not use. Otherwise, it's contain methods used to
+ * work with shader program. For instance, get location of attribute and uniform, log status
+ * of compile process, bind data to attribute, etc.
+ *
+ */
+class Shader
+{
+///////////////////////////////////////////////////////////////////////////////
+// Life-cycle
+///////////////////////////////////////////////////////////////////////////////
+public:
+	/**
+	 * The constructor of this class
+	 */
+	Shader(void);
+	
+	/**
+	 * The destructor of this class
+	 */
+	~Shader(void);
+	
+	/**
+	 * Construct method
+	 *
+	 * @param pVertexFile: The vertex shader source
+	 * @param pFragFile: The fragment shader source
+	 */
+	void Construct(const char *pVertexFile, const char *pFragFile);
+	
+	/**
+	 * Release method
+	 */
+	void Terminate(void);
+	
+	
+///////////////////////////////////////////////////////////////////////////////
+// Public Functions
+///////////////////////////////////////////////////////////////////////////////
+public:
+	/**
+	 * Compile shader from file
+	 */
+	bool CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShaderType type);
+	
+	/**
+	 * Link program
+	 */
+	bool Link(void);
+	
+	/**
+	 * Use program
+	 */	 
+	void Use(void);
+
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////
+// Private Functions
+///////////////////////////////////////////////////////////////////////////////
+private:
+	/**
+	 * Get location of uniform
+	 */
+	int GetUniformLocation(const char *pUniform);
+	
+	/**
+	 * Get location of attribute
+	 */
+	int GetAttributeLocation(const char *pAttr);
+	
+	/**
+	 * Check the file is exist or not
+	 */
+	bool FileExists(const char *pPath);
+	
+
+///////////////////////////////////////////////////////////////////////////////
+// Attributes
+///////////////////////////////////////////////////////////////////////////////
+private:
+	// Shader program
+	GLuint				m_nProgramID;
+	// Vertex shader
+	GLuint				m_nVertexID;
+	// Fragment shader
+	GLuint				m_nFragmentID;
+	// Flag for link status of program
+	bool 				m_bLinked;
+}
 
 
 #endif // APP_COMMON_SHADER_H

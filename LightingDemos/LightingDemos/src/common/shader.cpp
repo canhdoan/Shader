@@ -14,7 +14,7 @@
 #include "package.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-
+/*
 namespace Shader
 {
 	void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID)
@@ -107,6 +107,6 @@ namespace Shader
 		glDeleteShader(vertexID);
 		glDeleteShader(fragmentID);
 	}
-};
+};*/
 
 ///////////////////////////////////////////////////////////////////////////////
