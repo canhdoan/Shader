@@ -14,102 +14,6 @@
 #include "package.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-/*
-namespace Shader
-{
-	void LoadShader(const char* pVertexFile, const char *pFragFile, GLuint &programID)
-	{
-		GLuint vertexID, fragmentID;
-		GLint compile;
-		GLint nLengthInfo = 0;
-
-		char *pVertexSource = NULL;
-		const char *pVS = NULL;
-		
-		// Get vertex source from file
-		pVertexSource = TextHelper::ReadFile(pVertexFile);
-		pVS = pVertexSource;
-		// Create vertex shader
-		vertexID = glCreateShader(GL_VERTEX_SHADER);
-		if (vertexID == 0)
-			printf("ERROR: Can not create vertex shader!");
-		// Load shader source
-		glShaderSource(vertexID, 1, &pVS);
-		// Compile the vertex shader
-		glCompileShader(vertexID);
-		// Check compile status
-		glGetShaderiv(vertexID, GL_COMPILE_STATUS, &compile);
-		if (!compile)
-		{
-			nLengthInfo = 0;
-			glGetShaderiv(vertexID, GL_INFO_LOG_LENGTH, &nLengthInfo);
-			if (nLengthInfo > 1)
-			{
-				// Show log content
-				char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
-				glGetShaderInfoLog(vertexID, nLengthInfo, NULL, pLog);
-				printf("SHADER COMPILE ERROR: %s\n", pLog);
-				free(pLog);
-			}
-		}
-
-
-		char *pFragSource = NULL;
-		const char *pFS = NULL;
-		// Get fragment source from file
-		pFragSource = TextHelper::ReadFile(pFragFile);
-		pFS = pVertexSource;
-		// Create fragment shader
-		fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
-		if (fragmentID == 0)
-			printf("ERROR: Can not create fragment shader!");
-		// Load shader source
-		glShaderSource(fragmentID, 1, &pFS);
-		// Compile the fragment shader
-		glCompileShader(fragmentID);
-		// Check compile status
-		glGetShaderiv(fragmentID, GL_COMPILE_STATUS, &compile);
-		if (!compile)
-		{
-			nLengthInfo = 0;
-			glGetShaderiv(nLengthInfo, GL_INFO_LOG_LENGTH, &nLengthInfo);
-			if (nLengthInfo > 1)
-			{
-				char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
-				glGetShaderInfoLog(fragmentID, nLengthInfo, NULL, pLog);
-				printf("SHADER COMPILE ERROR: %s\n", pLog);
-				free(pLog);
-			}
-		}
-
-
-		// Create programe
-		programID = glCreateProgram();
-		// Attach shader
-		glAttachShader(programID, vertexID);
-		glAttachShader(programID, fragmentID);
-		// Link the program
-		glLinkProgram(programID);
-		// Validate program
-		glValidateProgram(programID);
-		// Check status of the compile and link
-		nLengthInfo = 0;
-		glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &nLengthInfo);
-		if (nLengthInfo > 0)
-		{
-			char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
-		    // show error
-		    glGetProgramInfoLog(programID, nLengthInfo, &nLengthInfo, &pLog);
-		    fprintf("LINK PROGRAM ERROR: %s\n", pLog);
-		    free(pLog);
-		}
-		// Release vertex & fragment shader
-		glDeleteShader(vertexID);
-		glDeleteShader(fragmentID);
-	}
-};*/
-
-///////////////////////////////////////////////////////////////////////////////
 
 Shader::Shader(void) : 
  m_nProgramID(0),
@@ -141,7 +45,7 @@ void Shader::Construct(const char *pVertexFile, const char *pFragFile)
 		m_bCompile = false;
 	}
 
-	if (!CompileShaderFromFile(pVertexFile, GLSLShader::GLSLShaderType::FRAGMENT))
+	if (!CompileShaderFromFile(pFragFile, GLSLShader::GLSLShaderType::FRAGMENT))
 	{
 		printf("ERROR: Can not compile fragment shader from %s\n", pFragFile);
 		m_bCompile = false;
@@ -165,13 +69,23 @@ void Shader::Construct(const char *pVertexFile, const char *pFragFile)
 		if (nLengthInfo > 0)
 		{
 			m_bLinked = false;
-			char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
-		    // show error
-		    glGetProgramInfoLog(m_nProgramID, nLengthInfo, &nLengthInfo, &pLog);
-		    printf("ERROR: %s\n", pLog);
-		    free(pLog);
+			//char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
+		 //   // show error
+		 //   glGetProgramInfoLog(m_nProgramID, nLengthInfo, &nLengthInfo, &pLog);
+		 //   printf("ERROR: %s\n", pLog);
+		 //   free(pLog);
 		}
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::Use(bool bUse)
+{
+	if (bUse)
+		glUseProgram(m_nProgramID); // Use
+	else
+		glUseProgram(0); // Unuse
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -180,13 +94,13 @@ bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShader
 {
 	GLint compile;
 	GLint nLengthInfo = 0;
-	char *source = NULL;
+	const char *source = NULL;
 	source = TextHelper::ReadFile(pFileName);
 
 	if (type == GLSLShader::GLSLShaderType::VERTEX)
 	{
 		// Load shader source
-		glShaderSource(m_nVertexID, 1, &source);
+		glShaderSource(m_nVertexID, 1, &source, NULL);
 		// Compile the vertex shader
 		glCompileShader(m_nVertexID);
 		// Check compile status
@@ -208,7 +122,7 @@ bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShader
 	else if (type == GLSLShader::GLSLShaderType::FRAGMENT)
 	{
 		// Load shader source
-		glShaderSource(m_nFragmentID, 1, &source);
+		glShaderSource(m_nFragmentID, 1, &source, NULL);
 		// Compile fragment shader
 		glCompileShader(m_nFragmentID);
 		// Check compile status
@@ -267,51 +181,100 @@ int Shader::GetAttributeLocation(const char *pAttr)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void SetUniform(const char *szName, const glm::vec3 &v)
+void Shader::SetUniform(const char *szName, const glm::vec3 &v)
 {
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
+
+	glUniform3fv(nUniformLoc, 1, glm::value_ptr(v));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, const glm::vec4 &v)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
+
+	glUniform4fv(nUniformLoc, 1, glm::value_ptr(v));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, const glm::mat3 &m)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
+
+	glUniformMatrix3fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, const glm::mat4 &m)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
+
+	glUniformMatrix4fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, bool val)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
+
+	glUniform1i(nUniformLoc, val);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, int val)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
 	
+	glUniform1i(nUniformLoc, val);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void SetUniform(const char *szName, const glm::vec4 &v)
+void Shader::SetUniform(const char *szName, float val)
 {
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+	{
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	}
 
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void SetUniform(const char *szName, const glm::mat3 &v)
-{
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void SetUniform(const char *szName, const glm::mat4 &v)
-{
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void SetUniform(const char *szName, bool val)
-{
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void SetUniform(const char *szName, int val)
-{
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void SetUniform(const char *szName, float val)
-{
-
+	glUniform1f(nUniformLoc, val);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

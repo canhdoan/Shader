@@ -14,6 +14,11 @@
 #include "package.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+// Variables
+SingleLight *g_pSingleLight = NULL;
+
+
+///////////////////////////////////////////////////////////////////////////////
 // Declare all methods
 
 /**
@@ -83,10 +88,13 @@ int main(int argc, char **argv)
 void Initialize(void)
 {
 	printf("******************** INITIALIZE STAGE ********************");
-	InitializeGLUT();
 	InitializeGL();
 	InitializeShader();
 	InitializeVAO();
+
+	// Init SingleLight effect
+	g_pSingleLight = new SingleLight();
+	g_pSingleLight->Construct();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -118,20 +126,21 @@ void InitializeVAO(void)
 void OnUpdate(int w, int h)
 {
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+	g_pSingleLight->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void Paint(void)
 {
-
+	g_pSingleLight->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void OnPaint(void)
 {
-
+	glutPostRedisplay();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

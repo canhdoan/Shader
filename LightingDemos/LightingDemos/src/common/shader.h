@@ -96,40 +96,25 @@ public:
 	/**
 	 * Link program
 	 */
-	// bool Link(void);
+	bool Link(void) { return m_bLinked; }
 	
 	/**
 	 * Use program
 	 */	 
-	// void Use(void);
+	void Use(bool bUse);
 
 	/**
-	 * 
+	 * Get location of attribute
 	 */
-	// string Log(void);
-	
-	/**
-	 * Get handle
-	 */
-	// int GetHandle(void);
-	
-	/**
-	 *
-	 */
-	// bool IsLinked(void);
-	
-	/**
-	 *
-	 */
-	// void BindAttribLocation(GLuint location, const char *pName);
+	int GetAttributeLocation(const char *pAttr);
 	
 	/**
 	 * Set unifrom data
 	 */
 	void SetUniform(const char *szName, const glm::vec3 &v);
 	void SetUniform(const char *szName, const glm::vec4 &v);
-	void SetUniform(const char *szName, const glm::mat3 &v);
-	void SetUniform(const char *szName, const glm::mat4 &v);
+	void SetUniform(const char *szName, const glm::mat3 &m);
+	void SetUniform(const char *szName, const glm::mat4 &m);
 	void SetUniform(const char *szName, bool val);
 	void SetUniform(const char *szName, int val);
 	void SetUniform(const char *szName, float val);
@@ -144,11 +129,6 @@ private:
 	 * Get location of uniform
 	 */
 	int GetUniformLocation(const char *pUniform);
-	
-	/**
-	 * Get location of attribute
-	 */
-	int GetAttributeLocation(const char *pAttr);
 	
 	/**
 	 * Check the file is exist or not

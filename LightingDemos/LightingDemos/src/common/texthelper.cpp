@@ -17,7 +17,7 @@
 
 namespace TextHelper
 {
-	char* ReadFile(char *pPath)
+	char* ReadFile(const char *pPath)
 	{
 		FILE *file;
 		char *content = NULL;

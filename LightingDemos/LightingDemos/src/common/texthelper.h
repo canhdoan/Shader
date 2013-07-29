@@ -24,7 +24,7 @@ namespace TextHelper
 	 * @param pPath		: path of text file
 	 * @return			: char pointer that used to store content of text file
 	 */
-	char* ReadFile(char *pPath);
+	char* ReadFile(const char *pPath);
 
 	/**
 	 * Create a file follow path and write source on it
@@ -32,7 +32,7 @@ namespace TextHelper
 	 * @param pSource 	: content that used to write on new file
 	 * @return			: status
 	 */
-	int WriteFile(char *pPath, char *pSource);
+	int WriteFile(const char *pPath, const char *pSource);
 }
 
 #endif // APP_COMMON_TEXTHELPER_H

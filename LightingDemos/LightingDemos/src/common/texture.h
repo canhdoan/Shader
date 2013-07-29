@@ -11,13 +11,24 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#version 120
+#ifndef APP_COMMON_TEXTURE_H
+#define APP_COMMON_TEXTURE_H
 
-varying vec3 vary_light_intensity;
-
-void main()
+/**
+ * Define a texture helper, methods used to load texture image will implement here
+ *
+ */
+namespace Texture
 {
-	gl_FragColor = vec4(vary_light_intensity, 1.0);
-}
+	/**
+	 * Load bitmap texture method
+	 *
+	 * @param pImage: the path of bitmap file
+	 */
+	GLuint LoadBmpTexture(const char *pImage);
+
+};
+
+#endif // APP_COMMON_TEXTURE_H
 
 ///////////////////////////////////////////////////////////////////////////////

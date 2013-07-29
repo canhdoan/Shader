@@ -14,6 +14,8 @@
 #ifndef APP_COMMON_LOAD3DOBJ_H
 #define APP_COMMON_LOAD3DOBJ_H
 
+#include "object.h"
+
 namespace Load3DObj
 {
 	/**
