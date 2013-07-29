@@ -115,13 +115,17 @@ Shader::Shader(void) :
  m_nProgramID(0),
  m_nVertexID(0),
  m_nFragmentID(0),
- m_bLinked(false)
+ m_bLinked(true),
+ m_bCompile(true)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 
 Shader::~Shader(void)
-{}
+{
+	glDeleteShader(m_nVertexID);
+	glDeleteShader(m_nFragmentID);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -130,6 +134,44 @@ void Shader::Construct(const char *pVertexFile, const char *pFragFile)
 	// Create two shader program
 	m_nVertexID = glCreateShader(GL_VERTEX_SHADER);
 	m_nFragmentID = glCreateShader(GL_FRAGMENT_SHADER);
+	// Compile vertex and fragment shader from file
+	if (!CompileShaderFromFile(pVertexFile, GLSLShader::GLSLShaderType::VERTEX))
+	{
+		printf("ERROR: Can not compile vertex shader from %s\n", pVertexFile);
+		m_bCompile = false;
+	}
+
+	if (!CompileShaderFromFile(pVertexFile, GLSLShader::GLSLShaderType::FRAGMENT))
+	{
+		printf("ERROR: Can not compile fragment shader from %s\n", pFragFile);
+		m_bCompile = false;
+	}
+
+	if (m_bCompile)
+	{
+		GLint nLengthInfo = 0;
+		// Create programe
+		m_nProgramID = glCreateProgram();
+		// Attach shader
+		glAttachShader(m_nProgramID, m_nVertexID);
+		glAttachShader(m_nProgramID, m_nFragmentID);
+		// Link the program
+		glLinkProgram(m_nProgramID);
+		// Validate program
+		glValidateProgram(m_nProgramID);
+		// Check status of the compile and link
+		nLengthInfo = 0;
+		glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nLengthInfo);
+		if (nLengthInfo > 0)
+		{
+			m_bLinked = false;
+			char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
+		    // show error
+		    glGetProgramInfoLog(m_nProgramID, nLengthInfo, &nLengthInfo, &pLog);
+		    printf("ERROR: %s\n", pLog);
+		    free(pLog);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -144,7 +186,7 @@ bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShader
 	if (type == GLSLShader::GLSLShaderType::VERTEX)
 	{
 		// Load shader source
-		glShaderSource(m_nVertexID, 1, &pVS);
+		glShaderSource(m_nVertexID, 1, &source);
 		// Compile the vertex shader
 		glCompileShader(m_nVertexID);
 		// Check compile status
@@ -158,30 +200,48 @@ bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShader
 				// Show log content
 				char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
 				glGetShaderInfoLog(m_nVertexID, nLengthInfo, NULL, pLog);
-				printf("SHADER COMPILE ERROR: %s\n", pLog);
+				printf("ERROR: %s\n", pLog);
 				free(pLog);
 			}
 		}
 	}
 	else if (type == GLSLShader::GLSLShaderType::FRAGMENT)
 	{
-
+		// Load shader source
+		glShaderSource(m_nFragmentID, 1, &source);
+		// Compile fragment shader
+		glCompileShader(m_nFragmentID);
+		// Check compile status
+		glGetShaderiv(m_nFragmentID, GL_COMPILE_STATUS, &compile);
+		if (!compile)
+		{
+			nLengthInfo = 0;
+			glGetShaderiv(m_nFragmentID, GL_INFO_LOG_LENGTH, &nLengthInfo);
+			if (nLengthInfo > 1)
+			{
+				// Show log content
+				char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
+				glGetShaderInfoLog(m_nFragmentID, nLengthInfo, NULL, pLog);
+				printf("ERROR: %s\n", pLog);
+				free(pLog);
+			}
+		}
 	}
 	else if (type == GLSLShader::GLSLShaderType::GEOMETRY)
 	{
-		
+		// TODO: ...
 	}
 	else if (type == GLSLShader::GLSLShaderType::TESS_CONTROL)
 	{
-		
+		// TODO: ...
 	}
 	else if (type == GLSLShader::GLSLShaderType::TESS_EVALUATION)
 	{
-		
+		// TODO: ...
 	}
 	else
 	{
-		printf("Shader type wrong!\n");
+		printf("ERROR: Shader type wrong!\n");
 	}
 
 	return true;
@@ -189,9 +249,70 @@ bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShader
 
 ///////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////
+int Shader::GetUniformLocation(const char *pUniform)
+{
+	int location = 0;
+	location = glGetUniformLocation(m_nProgramID, pUniform);
+	return (location < 0) ? -1 : location;	
+}
 
 ///////////////////////////////////////////////////////////////////////////////
+
+int Shader::GetAttributeLocation(const char *pAttr)
+{
+	int location = 0;
+	location = glGetAttribLocation(m_nProgramID, pAttr);
+	return (location < 0) ? -1 : location;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, const glm::vec3 &v)
+{
+	
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, const glm::vec4 &v)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, const glm::mat3 &v)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, const glm::mat4 &v)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, bool val)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, int val)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SetUniform(const char *szName, float val)
+{
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 

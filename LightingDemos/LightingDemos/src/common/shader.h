@@ -124,8 +124,15 @@ public:
 	// void BindAttribLocation(GLuint location, const char *pName);
 	
 	/**
-	 *
+	 * Set unifrom data
 	 */
+	void SetUniform(const char *szName, const glm::vec3 &v);
+	void SetUniform(const char *szName, const glm::vec4 &v);
+	void SetUniform(const char *szName, const glm::mat3 &v);
+	void SetUniform(const char *szName, const glm::mat4 &v);
+	void SetUniform(const char *szName, bool val);
+	void SetUniform(const char *szName, int val);
+	void SetUniform(const char *szName, float val);
 	
 	
 	
@@ -159,6 +166,8 @@ private:
 	GLuint				m_nVertexID;
 	// Fragment shader
 	GLuint				m_nFragmentID;
+	// Flag for compile status
+	bool				m_bCompile;
 	// Flag for link status of program
 	bool 				m_bLinked;
 };
