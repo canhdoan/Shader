@@ -89,15 +89,43 @@ public:
 	bool CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShaderType type);
 	
 	/**
+	 * Compile shader from string
+	 */
+	bool CompileShaderFromString(const string &source, GLSLShader::GLSLShaderType type);
+	
+	/**
 	 * Link program
 	 */
-	bool Link(void);
+	// bool Link(void);
 	
 	/**
 	 * Use program
 	 */	 
-	void Use(void);
+	// void Use(void);
 
+	/**
+	 * 
+	 */
+	// string Log(void);
+	
+	/**
+	 * Get handle
+	 */
+	// int GetHandle(void);
+	
+	/**
+	 *
+	 */
+	// bool IsLinked(void);
+	
+	/**
+	 *
+	 */
+	// void BindAttribLocation(GLuint location, const char *pName);
+	
+	/**
+	 *
+	 */
 	
 	
 	
@@ -133,7 +161,7 @@ private:
 	GLuint				m_nFragmentID;
 	// Flag for link status of program
 	bool 				m_bLinked;
-}
+};
 
 
 #endif // APP_COMMON_SHADER_H

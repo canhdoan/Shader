@@ -110,3 +110,93 @@ namespace Shader
 };*/
 
 ///////////////////////////////////////////////////////////////////////////////
+
+Shader::Shader(void) : 
+ m_nProgramID(0),
+ m_nVertexID(0),
+ m_nFragmentID(0),
+ m_bLinked(false)
+{}
+
+///////////////////////////////////////////////////////////////////////////////
+
+Shader::~Shader(void)
+{}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::Construct(const char *pVertexFile, const char *pFragFile)
+{
+	// Create two shader program
+	m_nVertexID = glCreateShader(GL_VERTEX_SHADER);
+	m_nFragmentID = glCreateShader(GL_FRAGMENT_SHADER);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+bool Shader::CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShaderType type)
+{
+	GLint compile;
+	GLint nLengthInfo = 0;
+	char *source = NULL;
+	source = TextHelper::ReadFile(pFileName);
+
+	if (type == GLSLShader::GLSLShaderType::VERTEX)
+	{
+		// Load shader source
+		glShaderSource(m_nVertexID, 1, &pVS);
+		// Compile the vertex shader
+		glCompileShader(m_nVertexID);
+		// Check compile status
+		glGetShaderiv(m_nVertexID, GL_COMPILE_STATUS, &compile);
+		if (!compile)
+		{
+			nLengthInfo = 0;
+			glGetShaderiv(m_nVertexID, GL_INFO_LOG_LENGTH, &nLengthInfo);
+			if (nLengthInfo > 1)
+			{
+				// Show log content
+				char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);
+				glGetShaderInfoLog(m_nVertexID, nLengthInfo, NULL, pLog);
+				printf("SHADER COMPILE ERROR: %s\n", pLog);
+				free(pLog);
+			}
+		}
+	}
+	else if (type == GLSLShader::GLSLShaderType::FRAGMENT)
+	{
+
+	}
+	else if (type == GLSLShader::GLSLShaderType::GEOMETRY)
+	{
+		
+	}
+	else if (type == GLSLShader::GLSLShaderType::TESS_CONTROL)
+	{
+		
+	}
+	else if (type == GLSLShader::GLSLShaderType::TESS_EVALUATION)
+	{
+		
+	}
+	else
+	{
+		printf("Shader type wrong!\n");
+	}
+
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
+bool Shader::FileExists(const char *pPath)
+{
+	return true;
+}
+///////////////////////////////////////////////////////////////////////////////
