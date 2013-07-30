@@ -36,17 +36,17 @@ namespace Load3DObj
 	/**
 	 * Calculate normal vector
 	 */
-	void CalcNormalVector(void);
+	void CalcNormalVector(OBJECT_3DS_PTR pObject);
 	
 	/**
 	 * Calculate tangent vector
 	 */
-	void CalcTangentVector(void);
+	void CalcTangentVector(OBJECT_3DS_PTR pObject);
 	 
 	/**
 	 * Calculate bitangent(binormal) vector
 	 */
-	void CalcBiTangentVector(void);
+	void CalcBiTangentVector(OBJECT_3DS_PTR pObject);
 	
 };
 

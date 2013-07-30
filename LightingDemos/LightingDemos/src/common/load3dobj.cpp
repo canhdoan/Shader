@@ -182,21 +182,54 @@ namespace Load3DObj
 	
 	///
 	
-	void CalcNormalVector(void)
+	void CalcNormalVector(OBJECT_3DS_PTR pObject)
 	{
-	
+		// Some variable local
+		int i;
+		glm::vec3 vec1, vec2, vec3, bvec1, bvec2 ,vec_normal;
+		int polygon_connection[MAX_VERTICES]; // number of polygon around each vertex
+		
+		// Reset normal array
+		for (i = 0; i < pObject->num_vertices; i++)
+		{
+			pObject->normal[i].x = 0.0;
+			pObject->normal[i].y = 0.0;
+			pObject->normal[i].z = 0.0;
+			polygon_connection[i] = 0;
+		}
+		
+		// Calculate normal vector
+		for (i = 0; i < pObject->num_polygons; i++)
+		{
+			vec1.x = pObject->vertex[pObject->polygon[i].a].x;
+			vec1.y = pObject->vertex[pObject->polygon[i].a].y;
+			vec1.z = pObject->vertex[pObject->polygon[i].a].z;
+			
+			vec2.x = pObject->vertex[pObject->polygon[i].b].x;
+			vec2.y = pObject->vertex[pObject->polygon[i].b].y;
+			vec2.z = pObject->vertex[pObject->polygon[i].b].z;
+			
+			vec3.x = pObject->vertex[pObject->polygon[i].c].x;
+			vec3.y = pObject->vertex[pObject->polygon[i].c].y;
+			vec3.z = pObject->vertex[pObject->polygon[i].c].z;
+			
+			// Polygon normal calculation
+			bvec1 = vec2 - vec1;
+			bvec2 = vec3 - vec1;
+			
+		}
 	}
 	
 	///
 	
-	void CalcTangentVector(void)
+	void CalcTangentVector(OBJECT_3DS_PTR pObject)
 	{
 	
 	}
 	 
 	///
 	
-	void CalcBiTangentVector(void)
+	void CalcBiTangentVector(OBJECT_3DS_PTR pObject)
 	{
 	
 	}
