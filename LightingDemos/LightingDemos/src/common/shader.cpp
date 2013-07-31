@@ -66,7 +66,7 @@ void Shader::Construct(const char *pVertexFile, const char *pFragFile)
 		// Check status of the compile and link
 		nLengthInfo = 0;
 		glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nLengthInfo);
-		if (nLengthInfo > 0)
+		if (nLengthInfo > 1)
 		{
 			m_bLinked = false;
 			//char *pLog = (char*)malloc(sizeof(char) * nLengthInfo);

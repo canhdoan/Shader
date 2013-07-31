@@ -44,6 +44,7 @@ void SingleLight::Construct(void)
 {
 	// Init 3ds model object
 	Load3DObj::Load3dsModel("data/objects/spaceship.3DS", &m_Object);
+	Load3DObj::CalcNormalVector(&m_Object);
 	m_Object.texture_id = Texture::LoadBmpTexture("data/textures/spaceshiptexture.bmp");
 
 	// Init data for update uniform
@@ -87,7 +88,7 @@ void SingleLight::Construct(void)
 		glVertexAttribPointer(m_nVertexLoc, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*3, 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_nVerticesVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*2*m_Object.num_vertices, 
+		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*3*m_Object.num_vertices, 
 			&m_Object.normal[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(m_nNormalLoc);
 		glVertexAttribPointer(m_nNormalLoc, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*3, 0);

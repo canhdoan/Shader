@@ -214,9 +214,39 @@ namespace Load3DObj
 			vec3.z = pObject->vertex[pObject->polygon[i].c].z;
 			
 			// Polygon normal calculation
-			bvec1 = vec2 - vec1;
-			bvec2 = vec3 - vec1;
-			
+			bvec1 = vec1 - vec2; // Vector from first vertex to second vertex
+			bvec2 = vec1 - vec3; // Vector form first vertex to third vertex
+			vec_normal = glm::cross(bvec1, bvec2); // Normalize dot product of two vector
+			vec_normal = glm::normalize(vec_normal);
+
+			// For each vertex shared by polygon, increase connection
+			polygon_connection[pObject->polygon[i].a] += 1;
+			polygon_connection[pObject->polygon[i].b] += 1;
+			polygon_connection[pObject->polygon[i].c] += 1;
+
+			// For each polygon, add normal vector
+			pObject->normal[pObject->polygon[i].a].x += vec_normal.x;
+			pObject->normal[pObject->polygon[i].a].y += vec_normal.y;
+			pObject->normal[pObject->polygon[i].a].z += vec_normal.z;
+
+			pObject->normal[pObject->polygon[i].b].x += vec_normal.x;
+			pObject->normal[pObject->polygon[i].b].y += vec_normal.y;
+			pObject->normal[pObject->polygon[i].b].z += vec_normal.z;
+
+			pObject->normal[pObject->polygon[i].c].x += vec_normal.x;
+			pObject->normal[pObject->polygon[i].c].y += vec_normal.y;
+			pObject->normal[pObject->polygon[i].c].z += vec_normal.z;
+		}
+
+		// Average polygon normal to obtain vertex normal
+		for (i = 0; i < pObject->num_vertices; ++i)
+		{
+			if (polygon_connection[i] > 0)
+			{
+				pObject->normal[i].x /= polygon_connection[i];
+				pObject->normal[i].y /= polygon_connection[i];
+				pObject->normal[i].z /= polygon_connection[i];
+			}
 		}
 	}
 	
