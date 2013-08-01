@@ -19,7 +19,7 @@ uniform vec3 uni_light_color;
 
 uniform mat4 uni_mvmatrix;
 uniform mat3 uni_normalmatrix;
-uniform mat4 uni_projectionmatrix;
+// uniform mat4 uni_projectionmatrix;
 uniform mat4 uni_mvpmatrix;
 
 attribute vec3 attr_vertex;

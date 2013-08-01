@@ -14,6 +14,12 @@
 #ifndef APP_SINGLELIGHT_H
 #define APP_SINGLELIGHT_H
 
+/**
+ * This class is an simple example about lighting effect with shader
+ * It's only use diffuse component for this demo.
+ * Class contains default methods, for instance Construct, Destruct,
+ * Update, Render.
+ */
 class SingleLight
 {
 public:

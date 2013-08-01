@@ -52,11 +52,6 @@ void SingleLight::Construct(void)
 	m_vDiffuse = glm::vec3(0.2f, 0.6f, 0.1f);
 	m_vLight = glm::vec3(1.0f, 1.0f, 1.0f);
 
-	m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
-    m_mRotateX = glm::rotate(m_mTranslate,  10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    m_mRotateY = glm::rotate(m_mRotateX, 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-    m_mModelViewMatrix = glm::rotate(m_mRotateY, 10.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-
 	// Init shader program
 	char *pVertex = "data/shaders/singlelight.vs";
 	char *pFragment = "data/shaders/singlelight.fs";
@@ -87,7 +82,7 @@ void SingleLight::Construct(void)
 		glEnableVertexAttribArray(m_nVertexLoc);
 		glVertexAttribPointer(m_nVertexLoc, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*3, 0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_nVerticesVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_nNormalVBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*3*m_Object.num_vertices, 
 			&m_Object.normal[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(m_nNormalLoc);
@@ -102,7 +97,7 @@ void SingleLight::Construct(void)
 
 void SingleLight::Update(int w, int h)
 {
-	m_mProjectionMatrix = glm::perspective(45.0f, (GLfloat)w/h, 10.f, 10000.f);
+	m_mProjectionMatrix = glm::perspective(90.0f, (GLfloat)w/h, 10.f, 10000.f);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -112,6 +107,10 @@ void SingleLight::Render(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Update data for uniform
+	m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
+    m_mRotateX = glm::rotate(m_mTranslate,  rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
+    m_mRotateY = glm::rotate(m_mRotateX, rotation_y, glm::vec3(0.0f, 1.0f, 0.0f));
+    m_mModelViewMatrix = glm::rotate(m_mRotateY, rotation_z, glm::vec3(0.0f, 0.0f, 1.0f));
     m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 
     glBindVertexArray(m_nVertexVAO);
@@ -123,7 +122,7 @@ void SingleLight::Render(void)
 
 	m_pShader->SetUniform("uni_mvmatrix", m_mModelViewMatrix);
 	m_pShader->SetUniform("uni_normalmatrix", m_mNormalMatrix);
-	m_pShader->SetUniform("uni_projectionmatrix", m_mProjectionMatrix);
+	// m_pShader->SetUniform("uni_projectionmatrix", m_mProjectionMatrix);
 	m_pShader->SetUniform("uni_mvpmatrix", m_mMVPMatrix);
 
 	glDrawElements(GL_TRIANGLES, m_Object.num_polygons*3, GL_UNSIGNED_SHORT, 0);

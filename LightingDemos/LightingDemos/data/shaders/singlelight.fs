@@ -18,6 +18,7 @@ varying vec3 vary_light_intensity;
 void main()
 {
 	gl_FragColor = vec4(vary_light_intensity, 1.0);
+	// gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

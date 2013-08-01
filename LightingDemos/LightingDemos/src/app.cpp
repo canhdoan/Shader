@@ -17,6 +17,10 @@
 // Variables
 SingleLight *g_pSingleLight = NULL;
 
+// Rotate variables
+float rotation_x=0, rotation_x_increment=0.1f;
+float rotation_y=0, rotation_y_increment=0.05f;
+float rotation_z=0, rotation_z_increment=0.03f;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Declare all methods
@@ -140,6 +144,14 @@ void Paint(void)
 
 void OnPaint(void)
 {
+	rotation_x = rotation_x + rotation_x_increment;
+	rotation_y = rotation_y + rotation_y_increment;
+	rotation_z = rotation_z + rotation_z_increment;
+
+	if (rotation_x > 359) rotation_x = 0;
+	if (rotation_y > 359) rotation_y = 0;
+	if (rotation_z > 359) rotation_z = 0;
+	
 	glutPostRedisplay();
 }
 
