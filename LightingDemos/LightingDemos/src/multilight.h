@@ -47,11 +47,30 @@ private:
 	Shader			*m_pShader;
 	// Object
 	OBJECT_3DS		m_Object;
+	// List attribute location
+	GLuint			m_nVertexLoc;
+	GLuint			m_nNormalLoc;
 	// List vertex buffer
+	GLuint 			m_nVertexVAO;
+	GLuint			m_nVerticesVBO;
+	GLuint			m_nNormalVBO;
+	GLuint			m_nIndicesVBO;	
+	// Variable for storage data of uniform
+	glm::vec3		m_vLight0;
+	glm::vec3		m_vLight1;
+	glm::vec3		m_vLight2;
+	glm::vec3		m_vLight3;
+	glm::vec3		m_vLight4;
 
-	// Variable for uniform
-
-	
+	glm::mat4		m_mView; // View vector
+	glm::mat4 		m_mModelViewMatrix; // Model-View matrix
+	glm::mat3 		m_mNormalMatrix; // Normal matrix
+	glm::mat4		m_mProjectionMatrix; // Projection matrix
+	glm::mat4 		m_mMVPMatrix; // Model-View-Projection matrix
+	// Internal matrix
+	glm::mat4		m_mTranslate;
+	glm::mat4		m_mRotateX;
+	glm::mat4		m_mRotateY;
 };
 
 #endif // APP_MULTILIGHT_H

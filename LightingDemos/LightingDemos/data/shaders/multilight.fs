@@ -11,24 +11,13 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_PACKAGE_H
-#define APP_PACKAGE_H
+#version 120
 
-#define PI 3.141592653589793
-#define TWOPI 6.2831853071795862
+varying vec3 vary_color;
 
-#include "common/package.h"
-#include "singlelight.h"
-#include "ADSshading.h"
-#include "multilight.h"
-
-extern float rotation_x;
-extern float rotation_x_increment;
-extern float rotation_y;
-extern float rotation_y_increment;
-extern float rotation_z;
-extern float rotation_z_increment;
-
-#endif // APP_PACKAGE_H
+void main()
+{
+	gl_FragColor = vec4(vary_color, 1.0);
+}
 
 ///////////////////////////////////////////////////////////////////////////////

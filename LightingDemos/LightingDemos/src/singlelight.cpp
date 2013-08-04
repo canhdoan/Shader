@@ -45,8 +45,6 @@ void SingleLight::Construct(void)
 	// Init 3ds model object
 	Load3DObj::Load3dsModel("data/objects/spaceship.3DS", &m_Object);
 	Load3DObj::CalcNormalVector(&m_Object);
-	m_Object.texture_id = Texture::LoadBmpTexture("data/textures/spaceshiptexture.bmp");
-
 	// Init data for update uniform
 	m_vLightPos = glm::vec4(100.0f, 0.0f, -10.0f, 1.0f);
 	m_vDiffuse = glm::vec3(0.2f, 0.6f, 0.1f);

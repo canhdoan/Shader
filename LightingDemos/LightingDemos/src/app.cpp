@@ -17,6 +17,7 @@
 // Variables
 SingleLight *g_pSingleLight = NULL;
 ADSShading *g_pADS = NULL;
+MultiLight *g_pMultiLight = NULL;
 
 // Rotate variables
 float rotation_x=0, rotation_x_increment=0.1f;
@@ -102,8 +103,12 @@ void Initialize(void)
 	// g_pSingleLight->Construct();
 
 	// Init ADS effect
-	g_pADS = new ADSShading();
-	g_pADS->Construct();
+	// g_pADS = new ADSShading();
+	// g_pADS->Construct();
+
+	// Init MultiLight effect
+	g_pMultiLight = new MultiLight();
+	g_pMultiLight->Construct();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -136,7 +141,8 @@ void OnUpdate(int w, int h)
 {
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 	// g_pSingleLight->Update(w, h);
-	g_pADS->Update(w,h);
+	// g_pADS->Update(w,h);
+	g_pMultiLight->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -144,7 +150,8 @@ void OnUpdate(int w, int h)
 void Paint(void)
 {
 	// g_pSingleLight->Render();
-	g_pADS->Render();
+	// g_pADS->Render();
+	g_pMultiLight->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

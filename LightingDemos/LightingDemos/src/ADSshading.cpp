@@ -46,7 +46,6 @@ void ADSShading::Construct(void)
 	// Initialize object from file .3ds
 	Load3DObj::Load3dsModel("data/objects/spaceship.3DS", &m_Object);
 	Load3DObj::CalcNormalVector(&m_Object);
-	m_Object.texture_id = Texture::LoadBmpTexture("data/textures/spaceshiptexture.bmp");
 	// Init data for uniform
 	m_vLightPos = glm::vec4(2.0f,4.0f,1.0f,1.0f);
 	// Initialize shader program
