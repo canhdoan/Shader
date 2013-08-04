@@ -181,16 +181,47 @@ int Shader::GetAttributeLocation(const char *pAttr)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+int Shader::GetSubroutine(GLSLShader::GLSLShaderType type, const char *pSub)
+{
+	int location = 0;
+
+	if (type == GLSLShader::GLSLShaderType::VERTEX)
+	{
+		location = glGetSubroutineIndex(m_nProgramID, GL_VERTEX_SHADER, pSub);
+	}
+	else if (type == GLSLShader::GLSLShaderType::FRAGMENT)
+	{
+		location = glGetSubroutineIndex(m_nProgramID, GL_FRAGMENT_SHADER, pSub);
+	}
+	else if (type == GLSLShader::GLSLShaderType::GEOMETRY)
+	{
+		// TODO: ...
+	}
+	else if (type == GLSLShader::GLSLShaderType::TESS_CONTROL)
+	{
+		// TODO: ...
+	}
+	else if (type == GLSLShader::GLSLShaderType::TESS_EVALUATION)
+	{
+		// TODO: ...
+	}
+	else
+	{
+		printf("ERROR: Shader type wrong!\n");
+	}
+	return (location < 0) ? -1 : location;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 void Shader::SetUniform(const char *szName, const glm::vec3 &v)
 {
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-
-	glUniform3fv(nUniformLoc, 1, glm::value_ptr(v));
+	else
+		glUniform3fv(nUniformLoc, 1, glm::value_ptr(v));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -200,11 +231,9 @@ void Shader::SetUniform(const char *szName, const glm::vec4 &v)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-
-	glUniform4fv(nUniformLoc, 1, glm::value_ptr(v));
+	else
+		glUniform4fv(nUniformLoc, 1, glm::value_ptr(v));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -214,11 +243,9 @@ void Shader::SetUniform(const char *szName, const glm::mat3 &m)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-
-	glUniformMatrix3fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+	else
+		glUniformMatrix3fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -228,11 +255,9 @@ void Shader::SetUniform(const char *szName, const glm::mat4 &m)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-
-	glUniformMatrix4fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+	else
+		glUniformMatrix4fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -242,11 +267,9 @@ void Shader::SetUniform(const char *szName, bool val)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-
-	glUniform1i(nUniformLoc, val);
+	else
+		glUniform1i(nUniformLoc, val);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -256,11 +279,9 @@ void Shader::SetUniform(const char *szName, int val)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
-	
-	glUniform1i(nUniformLoc, val);
+	else
+		glUniform1i(nUniformLoc, val);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -270,11 +291,21 @@ void Shader::SetUniform(const char *szName, float val)
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
-	{
 		printf("DEBUG: The %s uniform not exist.\n", szName);
-	}
+	else
+		glUniform1f(nUniformLoc, val);
+}
 
-	glUniform1f(nUniformLoc, val);
+///////////////////////////////////////////////////////////////////////////////
+
+void Shader::SetUniform(const char *szName, float x, float y, float z)
+{
+	// Get location of uniform
+	int nUniformLoc = GetUniformLocation(szName);
+	if (nUniformLoc < 0)
+		printf("DEBUG: The %s uniform not exist.\n", szName);
+	else
+		glUniform3f(nUniformLoc, x, y, z);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

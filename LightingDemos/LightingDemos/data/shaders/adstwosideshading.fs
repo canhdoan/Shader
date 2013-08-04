@@ -11,21 +11,21 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_PACKAGE_H
-#define APP_PACKAGE_H
+#version 120
 
-#include "common/package.h"
-#include "singlelight.h"
-#include "ADSshading.h"
-#include "multilight.h"
+varying vec3 vary_front_color;
+varying vec3 vary_back_color;
 
-extern float rotation_x;
-extern float rotation_x_increment;
-extern float rotation_y;
-extern float rotation_y_increment;
-extern float rotation_z;
-extern float rotation_z_increment;
-
-#endif // APP_PACKAGE_H
+void main()
+{
+	if (gl_FrontFacing)
+	{
+		gl_FragColor = vec4(vary_front_color, 1.0);
+	}
+	else
+	{
+		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////

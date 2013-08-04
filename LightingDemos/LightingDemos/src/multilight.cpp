@@ -11,21 +11,10 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_PACKAGE_H
-#define APP_PACKAGE_H
+#include "package.h"
 
-#include "common/package.h"
-#include "singlelight.h"
-#include "ADSshading.h"
-#include "multilight.h"
+///////////////////////////////////////////////////////////////////////////////
 
-extern float rotation_x;
-extern float rotation_x_increment;
-extern float rotation_y;
-extern float rotation_y_increment;
-extern float rotation_z;
-extern float rotation_z_increment;
 
-#endif // APP_PACKAGE_H
 
 ///////////////////////////////////////////////////////////////////////////////

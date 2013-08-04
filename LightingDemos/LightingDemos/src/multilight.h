@@ -11,21 +11,49 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_PACKAGE_H
-#define APP_PACKAGE_H
+#ifndef APP_MULTILIGHT_H
+#define APP_MULTILIGHT_H
 
-#include "common/package.h"
-#include "singlelight.h"
-#include "ADSshading.h"
-#include "multilight.h"
+class MultiLight
+{
+public:
+	/**
+	 * The constructor for this class
+	 */
+	MultiLight(void);
 
-extern float rotation_x;
-extern float rotation_x_increment;
-extern float rotation_y;
-extern float rotation_y_increment;
-extern float rotation_z;
-extern float rotation_z_increment;
+	/**
+	 * The destructor for this class
+	 */
+	~MultiLight(void);
 
-#endif // APP_PACKAGE_H
+	/**
+	 * Construct method
+	 */
+	void Construct(void);
+
+	/**
+	 * Update method
+	 */
+	void Update(int w, int h);
+
+	/**
+	 * Render method
+	 */
+	void Render(void);
+
+private:
+	// Shader program
+	Shader			*m_pShader;
+	// Object
+	OBJECT_3DS		m_Object;
+	// List vertex buffer
+
+	// Variable for uniform
+
+	
+};
+
+#endif // APP_MULTILIGHT_H
 
 ///////////////////////////////////////////////////////////////////////////////

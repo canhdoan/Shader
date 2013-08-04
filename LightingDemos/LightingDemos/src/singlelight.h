@@ -70,7 +70,6 @@ private:
 	glm::mat3 		m_mNormalMatrix; // Normal matrix
 	glm::mat4		m_mProjectionMatrix; // Projection matrix
 	glm::mat4 		m_mMVPMatrix; // Model-View-Projection matrix
-
 	// Internal matrix
 	glm::mat4		m_mTranslate;
 	glm::mat4		m_mRotateX;

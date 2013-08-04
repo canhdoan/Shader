@@ -85,11 +85,17 @@ public:
 public:
 	/**
 	 * Compile shader from file
+	 * 
+	 * @param pFileName: shader file
+	 * @param type: type of shader(vertex or fragment)
 	 */
 	bool CompileShaderFromFile(const char *pFileName, GLSLShader::GLSLShaderType type);
 	
 	/**
 	 * Compile shader from string
+	 *
+	 * @param source: shader string
+	 * @param type: type of shader(vertex or fragment)
 	 */
 	bool CompileShaderFromString(const string &source, GLSLShader::GLSLShaderType type);
 	
@@ -107,6 +113,11 @@ public:
 	 * Get location of attribute
 	 */
 	int GetAttributeLocation(const char *pAttr);
+
+	/**
+	 * Get subroutine location
+	 */
+	int GetSubroutine(GLSLShader::GLSLShaderType type, const char *pSub);
 	
 	/**
 	 * Set unifrom data
@@ -118,6 +129,7 @@ public:
 	void SetUniform(const char *szName, bool val);
 	void SetUniform(const char *szName, int val);
 	void SetUniform(const char *szName, float val);
+	void SetUniform(const char *szName, float x, float y, float z);
 	
 	
 	

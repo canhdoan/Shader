@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\multilight.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\shader.cpp"
 				>
 			</File>
@@ -214,15 +218,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\multilight.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\object.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\common\package.h"
+				RelativePath=".\src\package.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\package.h"
+				RelativePath=".\src\common\package.h"
 				>
 			</File>
 			<File
