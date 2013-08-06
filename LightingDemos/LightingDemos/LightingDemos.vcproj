@@ -188,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\model\plane.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\shader.cpp"
 				>
 			</File>
@@ -196,11 +200,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\model\teapot.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\texthelper.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\common\texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\torus.cpp"
 				>
 			</File>
 		</Filter>
@@ -234,6 +246,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\model\package.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\plane.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\shader.h"
 				>
 			</File>
@@ -242,11 +262,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\model\teapot.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\texthelper.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\common\texture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\torus.h"
 				>
 			</File>
 		</Filter>
