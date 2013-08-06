@@ -56,21 +56,21 @@ private:
 	GLuint			m_nNormalVBO;
 	GLuint			m_nIndicesVBO;	
 	// Variable for storage data of uniform
-	glm::vec3		m_vLight0;
-	glm::vec3		m_vLight1;
-	glm::vec3		m_vLight2;
-	glm::vec3		m_vLight3;
-	glm::vec3		m_vLight4;
+	vec3			m_vLight0;
+	vec3			m_vLight1;
+	vec3			m_vLight2;
+	vec3			m_vLight3;
+	vec3			m_vLight4;
 
-	glm::mat4		m_mViewMatrix; // View matrix
-	glm::mat4 		m_mModelViewMatrix; // Model-View matrix
-	glm::mat3 		m_mNormalMatrix; // Normal matrix
-	glm::mat4		m_mProjectionMatrix; // Projection matrix
-	glm::mat4 		m_mMVPMatrix; // Model-View-Projection matrix
+	mat4			m_mViewMatrix; // View matrix
+	mat4 			m_mModelViewMatrix; // Model-View matrix
+	mat3 			m_mNormalMatrix; // Normal matrix
+	mat4			m_mProjectionMatrix; // Projection matrix
+	mat4 			m_mMVPMatrix; // Model-View-Projection matrix
 	// Internal matrix
-	glm::mat4		m_mTranslate;
-	glm::mat4		m_mRotateX;
-	glm::mat4		m_mRotateY;
+	mat4			m_mTranslate;
+	mat4			m_mRotateX;
+	mat4			m_mRotateY;
 
 	float 			m_fAngle;
 };

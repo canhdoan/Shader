@@ -51,8 +51,8 @@ vec3 ADSWithSpotLight()
 		float hDOTn = max(dot(h, Normal), 0.0);
 
 		return ambient 
-			+ (SpotFactor * SpotLight.Intensity) 
-			+ (Kd * sDOTn) + (Ks * pow(hDOTn, Shininess));
+			+ (SpotFactor * SpotLight.Intensity * ((Kd * sDOTn) 
+			+ (Ks * pow(hDOTn, Shininess))));
 	}
 	else
 		return ambient;
@@ -60,7 +60,33 @@ vec3 ADSWithSpotLight()
 
 void main()
 {
-	gl_FragColor = vec4(ADSWithSpotLight(), 1.0);
+	// Code for debug
+	vec3 Spot_Color = ADSWithSpotLight();
+
+	if (Spot_Color.x == 0 && Spot_Color.y == 0 && Spot_Color.z == 0)
+	{
+		gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+	}
+	else if (Spot_Color.x != 0 && Spot_Color.y == 0 && Spot_Color.z == 0)
+	{
+		gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+	}
+	else if (Spot_Color.x == 0 && Spot_Color.y != 0 && Spot_Color.z == 0)
+	{
+		gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+	}
+	else if (Spot_Color.x == 0 && Spot_Color.y == 0 && Spot_Color.z != 0)
+	{
+		gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+	}
+	else
+	{
+		gl_FragColor = vec4(Spot_Color, 1.0);
+	}
+
+
+
+	// gl_FragColor = vec4(ADSWithSpotLight(), 1.0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

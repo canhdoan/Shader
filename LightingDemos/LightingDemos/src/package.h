@@ -17,7 +17,7 @@
 #define PI 3.141592653589793
 #define TWOPI 6.2831853071795862
 
-#include "common/package.h"
+#include "model/package.h"
 #include "singlelight.h"
 #include "ADSshading.h"
 #include "multilight.h"

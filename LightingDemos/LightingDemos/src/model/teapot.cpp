@@ -11,38 +11,10 @@
 // Author: Canh Doan
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef APP_COMMON_PACKAGE_H
-#define APP_COMMON_PACKAGE_H
+#include "package.h"
 
-#pragma comment(lib, "glew32.lib")
-#include <GL/glew.h>
-#include <stdlib.h>
-#include <GL/glut.h>
-#include <stdio.h>
-#include <conio.h>
-#include <io.h>
-#include <cstdio>
-#include <cstdlib>
-#include <fstream>
-#include <sstream>
-#include <string.h>
-
-using namespace std;
+///////////////////////////////////////////////////////////////////////////////
 
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-using namespace glm;
-
-
-#include "texthelper.h"
-#include "texture.h"
-#include "object.h"
-#include "load3dobj.h"
-#include "shader.h"
-
-
-#endif // APP_COMMON_PACKAGE_H
 
 ///////////////////////////////////////////////////////////////////////////////

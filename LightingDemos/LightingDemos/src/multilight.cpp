@@ -47,16 +47,16 @@ void MultiLight::Construct(void)
 	Load3DObj::Load3dsModel("data/objects/spaceship.3DS", &m_Object);
 	Load3DObj::CalcNormalVector(&m_Object);
 	// Initialize all light data
-	m_vLight0 = glm::vec3(0.0f, 0.8f, 0.8f);
-	m_vLight1 = glm::vec3(0.0f, 0.0f, 0.8f);
-	m_vLight2 = glm::vec3(0.8f, 0.0f, 0.0f);
-	m_vLight3 = glm::vec3(0.0f, 0.8f, 0.0f);
-	m_vLight4 = glm::vec3(0.8f, 0.8f, 0.8f);
+	m_vLight0 = vec3(0.0f, 0.8f, 0.8f);
+	m_vLight1 = vec3(0.0f, 0.0f, 0.8f);
+	m_vLight2 = vec3(0.8f, 0.0f, 0.0f);
+	m_vLight3 = vec3(0.0f, 0.8f, 0.0f);
+	m_vLight4 = vec3(0.8f, 0.8f, 0.8f);
 	m_fAngle = 0.0f;
 
 	// Set view matrix
-	m_mViewMatrix = glm::lookAt(glm::vec3(0.5f, 0.75f, 0.75f), 
-		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	m_mViewMatrix = lookAt(vec3(0.5f, 0.75f, 0.75f), 
+		vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
 	// Initialize shader program
 	// char *pVertex = "data/shaders/multilight.vs";
@@ -112,7 +112,7 @@ void MultiLight::Update(int w, int h)
 	m_fAngle += 0.01f;
     if( m_fAngle > TWOPI) m_fAngle -= TWOPI;
 
-	m_mProjectionMatrix = glm::perspective(70.0f, (GLfloat)w/h, 10.0f, 10000.f);
+	m_mProjectionMatrix = perspective(70.0f, (GLfloat)w/h, 10.0f, 10000.f);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -124,10 +124,10 @@ void MultiLight::Render(void)
 	//-------------------------------------------------------------------------------------
 	// Code for multi-light demo
 	// Update data for uniform
-	// m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
- 	// m_mRotateX = glm::rotate(m_mTranslate,  rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
- 	// m_mRotateY = glm::rotate(m_mRotateX, rotation_y, glm::vec3(0.0f, 1.0f, 0.0f));
- 	// m_mModelViewMatrix = glm::rotate(m_mRotateY, rotation_z, glm::vec3(0.0f, 0.0f, 1.0f));
+	// m_mTranslate = translate(mat4(1.0f),vec3(0.0f, 0.0f, -300));
+ 	// m_mRotateX = rotate(m_mTranslate,  rotation_x, vec3(1.0f, 0.0f, 0.0f));
+ 	// m_mRotateY = rotate(m_mRotateX, rotation_y, vec3(0.0f, 1.0f, 0.0f));
+ 	// m_mModelViewMatrix = rotate(m_mRotateY, rotation_z, vec3(0.0f, 0.0f, 1.0f));
  	// m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 
  	// glBindVertexArray(m_nVertexVAO);
@@ -136,14 +136,14 @@ void MultiLight::Render(void)
 	// // Set uniform for light
 	// // Set position
 	// char name[256];
-	// glm::vec4 vLightPosition = glm::vec4(0.0);
+	// vec4 vLightPosition = vec4(0.0);
 	// float x, z;
 	// for (int i = 0; i < 5; i++)
 	// {
 	// 	_snprintf(name, 256, "uni_lights[%d].Position", i);
 	// 	x = 2.0f * cos((TWOPI/5) * i);
 	// 	z = 2.0f * sin((TWOPI/5) * i);
-	// 	vLightPosition = m_mViewMatrix*glm::vec4(x, 1.2f, z+1.0f, 1.0f);
+	// 	vLightPosition = m_mViewMatrix*vec4(x, 1.2f, z+1.0f, 1.0f);
 	// 	m_pShader->SetUniform(name, vLightPosition);
 	// }
 	// // Set light intensity
@@ -173,10 +173,10 @@ void MultiLight::Render(void)
 	//-------------------------------------------------------------------------------------
 	// Code for Phong shading demo
 	// Update data for uniform
-	// m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
-	// m_mRotateX = glm::rotate(m_mTranslate,  309.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	// m_mRotateY = glm::rotate(m_mRotateX, 333.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-	// m_mModelViewMatrix = glm::rotate(m_mRotateY, 200.123f, glm::vec3(0.0f, 0.0f, 1.0f));
+	// m_mTranslate = translate(mat4(1.0f),vec3(0.0f, 0.0f, -300));
+	// m_mRotateX = rotate(m_mTranslate,  309.0f, vec3(1.0f, 0.0f, 0.0f));
+	// m_mRotateY = rotate(m_mRotateX, 333.5f, vec3(0.0f, 1.0f, 0.0f));
+	// m_mModelViewMatrix = rotate(m_mRotateY, 200.123f, vec3(0.0f, 0.0f, 1.0f));
 	// m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 
 	// glBindVertexArray(m_nVertexVAO);
@@ -184,11 +184,11 @@ void MultiLight::Render(void)
 	// m_pShader->Use(true);
 	// // Set uniform for light
 	// // Set position
-	// glm::vec4 vLightPosition = glm::vec4(0.0);
+	// vec4 vLightPosition = vec4(0.0);
 	// float x, z;
 	// x = 2.0f * cos((TWOPI/5));
 	// z = 2.0f * sin((TWOPI/5));
-	// vLightPosition = m_mViewMatrix*glm::vec4(x, 1.2f, z+1.0f, 1.0f);
+	// vLightPosition = m_mViewMatrix*vec4(x, 1.2f, z+1.0f, 1.0f);
 	// m_pShader->SetUniform("LightPosition", vLightPosition);
 	// // Set light intensity
 	// m_pShader->SetUniform("LightIntensity", m_vLight0);
@@ -213,29 +213,34 @@ void MultiLight::Render(void)
 	//-------------------------------------------------------------------------------------
 	// Code for Spotlight shading demo
 	// Update data for uniform
-	m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
-	m_mRotateX = glm::rotate(m_mTranslate,  309.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	m_mRotateY = glm::rotate(m_mRotateX, 333.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-	m_mModelViewMatrix = glm::rotate(m_mRotateY, 200.123f, glm::vec3(0.0f, 0.0f, 1.0f));
+	m_mTranslate = translate(mat4(1.0f),vec3(0.0f, 0.0f, -300));
+	m_mRotateX = rotate(m_mTranslate,  rotation_x, vec3(1.0f, 0.0f, 0.0f));
+	m_mRotateY = rotate(m_mRotateX, rotation_y, vec3(0.0f, 1.0f, 0.0f));
+	m_mModelViewMatrix = rotate(m_mRotateY, rotation_z, vec3(0.0f, 0.0f, 1.0f));
 	m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 
 	glBindVertexArray(m_nVertexVAO);
 	// Use program
 	m_pShader->Use(true);
 	// Set uniform for light
-	glm::vec4 lightPos = glm::vec4(10.0f * glm::cos(m_fAngle), 10.0f, 10.0f * glm::sin(m_fAngle), 1.0f);
-    m_pShader->SetUniform("SpotLight.Position", m_mViewMatrix * lightPos);
-    glm::mat3 normalMatrix = glm::mat3( glm::vec3(m_mViewMatrix[0]), glm::vec3(m_mViewMatrix[1]), glm::vec3(m_mViewMatrix[2]));
-	m_pShader->SetUniform("SpotLight.Direction", normalMatrix * glm::vec3(-lightPos));
+	vec4 vLightPosition = vec4(0.0);
+	float x, z;
+	x = 2.0f * cos((TWOPI/5));
+	z = 2.0f * sin((TWOPI/5));
+	vLightPosition = m_mViewMatrix*vec4(x, 1.2f, z+1.0f, 1.0f);
+	// vec4 lightPos = vec4(10.0f * cos(m_fAngle), 10.0f, 10.0f * sin(m_fAngle), 1.0f);
+    m_pShader->SetUniform("SpotLight.Position", vLightPosition);
+    mat3 normalMatrix = mat3( vec3(m_mViewMatrix[0]), vec3(m_mViewMatrix[1]), vec3(m_mViewMatrix[2]));
+	m_pShader->SetUniform("SpotLight.Direction", normalMatrix * vec3(-vLightPosition));
 
-	m_pShader->SetUniform("SpotLight.Intensity", glm::vec3(0.9f,0.9f,0.9f) );
+	m_pShader->SetUniform("SpotLight.Intensity", vec3(0.0f, 0.8f, 0.8f));
     m_pShader->SetUniform("SpotLight.Exponent", 30.0f );
-    m_pShader->SetUniform("SpotLight.Cutoff", 15.0f );
+    m_pShader->SetUniform("SpotLight.Cutoff", 45.0f );
 
 	// Set uniform for material of light
-	m_pShader->SetUniform("Kd", 0.9f, 0.5f, 0.3f);
-	m_pShader->SetUniform("Ks", 0.95f, 0.95f, 0.95f);
-	m_pShader->SetUniform("Ka", 0.9f * 0.3f, 0.5f * 0.3f, 0.3f * 0.3f);
+	m_pShader->SetUniform("Kd", 0.4f, 0.4f, 0.4f);
+	m_pShader->SetUniform("Ks", 0.9f, 0.9f, 0.9f);
+	m_pShader->SetUniform("Ka", 0.1f, 0.1f, 0.1f);
 	m_pShader->SetUniform("Shininess", 100.0f);
 
 	// Set uniform for transform matrix

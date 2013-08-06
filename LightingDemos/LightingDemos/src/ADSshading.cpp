@@ -47,7 +47,7 @@ void ADSShading::Construct(void)
 	Load3DObj::Load3dsModel("data/objects/spaceship.3DS", &m_Object);
 	Load3DObj::CalcNormalVector(&m_Object);
 	// Init data for uniform
-	m_vLightPos = glm::vec4(2.0f,4.0f,1.0f,1.0f);
+	m_vLightPos = vec4(2.0f,4.0f,1.0f,1.0f);
 	// Initialize shader program
 	char *pVertex = "data/shaders/adsshading.vs"; // Use the vertex shader without function called
 	// char *pVertex = "data/shaders/adsshading_usingfunction.vs"; // Use the vertex shader with function called
@@ -97,7 +97,7 @@ void ADSShading::Construct(void)
 
 void ADSShading::Update(int w, int h)
 {
-	m_mProjectionMatrix = glm::perspective(90.0f, (GLfloat)w/h, 10.f, 10000.f);
+	m_mProjectionMatrix = perspective(90.0f, (GLfloat)w/h, 10.f, 10000.f);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,10 +108,10 @@ void ADSShading::Render(void)
 	// Code render for normal example
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Update data for uniform
-	m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(0.0f, 0.0f, -300));
-	m_mRotateX = glm::rotate(m_mTranslate,  rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
-	m_mRotateY = glm::rotate(m_mRotateX, rotation_y, glm::vec3(0.0f, 1.0f, 0.0f));
-	m_mModelViewMatrix = glm::rotate(m_mRotateY, rotation_z, glm::vec3(0.0f, 0.0f, 1.0f));
+	m_mTranslate = translate(mat4(1.0f),vec3(0.0f, 0.0f, -300));
+	m_mRotateX = rotate(m_mTranslate,  rotation_x, vec3(1.0f, 0.0f, 0.0f));
+	m_mRotateY = rotate(m_mRotateX, rotation_y, vec3(0.0f, 1.0f, 0.0f));
+	m_mModelViewMatrix = rotate(m_mRotateY, rotation_z, vec3(0.0f, 0.0f, 1.0f));
 	m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 	glBindVertexArray(m_nVertexVAO);
 	// Use program
@@ -143,10 +143,10 @@ void ADSShading::Render(void)
 
 	// // Render left model
 	// // Update data for uniform
-	// m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(-10.0f, 0.0f, -300));
-	// m_mRotateX = glm::rotate(m_mTranslate,  rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
-	// m_mRotateY = glm::rotate(m_mRotateX, rotation_y, glm::vec3(0.0f, 1.0f, 0.0f));
-	// m_mModelViewMatrix = glm::rotate(m_mRotateY, rotation_z, glm::vec3(0.0f, 0.0f, 1.0f));
+	// m_mTranslate = translate(mat4(1.0f),vec3(-10.0f, 0.0f, -300));
+	// m_mRotateX = rotate(m_mTranslate,  rotation_x, vec3(1.0f, 0.0f, 0.0f));
+	// m_mRotateY = rotate(m_mRotateX, rotation_y, vec3(0.0f, 1.0f, 0.0f));
+	// m_mModelViewMatrix = rotate(m_mRotateY, rotation_z, vec3(0.0f, 0.0f, 1.0f));
 	// m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 	// // Set ads method
 	// GLuint nADSIndex = m_pShader->GetSubroutine(GLSLShader::GLSLShaderType::VERTEX, "PhongModel");
@@ -172,10 +172,10 @@ void ADSShading::Render(void)
 	// GLuint nDiffuseIndex = m_pShader->GetSubroutine(GLSLShader::GLSLShaderType::VERTEX, "DiffuseOnly");
 	// glUniformSubroutinesuiv( GL_VERTEX_SHADER, 1, &nDiffuseIndex);
 	// // Update data for uniform
-	// m_mTranslate = glm::translate(glm::mat4(1.0f),glm::vec3(10.0f, 0.0f, -300));
-	// m_mRotateX = glm::rotate(m_mTranslate,  rotation_x, glm::vec3(1.0f, 0.0f, 0.0f));
-	// m_mRotateY = glm::rotate(m_mRotateX, rotation_y, glm::vec3(0.0f, 1.0f, 0.0f));
-	// m_mModelViewMatrix = glm::rotate(m_mRotateY, rotation_z, glm::vec3(0.0f, 0.0f, 1.0f));
+	// m_mTranslate = translate(mat4(1.0f),vec3(10.0f, 0.0f, -300));
+	// m_mRotateX = rotate(m_mTranslate,  rotation_x, vec3(1.0f, 0.0f, 0.0f));
+	// m_mRotateY = rotate(m_mRotateX, rotation_y, vec3(0.0f, 1.0f, 0.0f));
+	// m_mModelViewMatrix = rotate(m_mRotateY, rotation_z, vec3(0.0f, 0.0f, 1.0f));
 	// m_mMVPMatrix = m_mProjectionMatrix*m_mModelViewMatrix;
 	// // Set matrix transform matrix
 	// m_pShader->SetUniform("uni_mvmatrix", m_mModelViewMatrix);
