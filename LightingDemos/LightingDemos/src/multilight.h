@@ -62,7 +62,7 @@ private:
 	glm::vec3		m_vLight3;
 	glm::vec3		m_vLight4;
 
-	glm::mat4		m_mView; // View vector
+	glm::mat4		m_mViewMatrix; // View matrix
 	glm::mat4 		m_mModelViewMatrix; // Model-View matrix
 	glm::mat3 		m_mNormalMatrix; // Normal matrix
 	glm::mat4		m_mProjectionMatrix; // Projection matrix
@@ -71,6 +71,8 @@ private:
 	glm::mat4		m_mTranslate;
 	glm::mat4		m_mRotateX;
 	glm::mat4		m_mRotateY;
+
+	float 			m_fAngle;
 };
 
 #endif // APP_MULTILIGHT_H
