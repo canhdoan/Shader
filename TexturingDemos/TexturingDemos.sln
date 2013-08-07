@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TexturingDemos", "TexturingDemos\TexturingDemos.vcproj", "{BB4170F9-1C5C-486B-ABDC-51C47A9D85AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB4170F9-1C5C-486B-ABDC-51C47A9D85AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BB4170F9-1C5C-486B-ABDC-51C47A9D85AF}.Debug|Win32.Build.0 = Debug|Win32
+		{BB4170F9-1C5C-486B-ABDC-51C47A9D85AF}.Release|Win32.ActiveCfg = Release|Win32
+		{BB4170F9-1C5C-486B-ABDC-51C47A9D85AF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
