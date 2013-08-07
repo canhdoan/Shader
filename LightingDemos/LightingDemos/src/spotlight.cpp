@@ -70,7 +70,7 @@ void Spotlight::Construct(void)
 
 void Spotlight::Update(int w, int h)
 {
-	m_mProjectionMatrix = glm::perspective(60.0f, (float)w/h, 0.3f, 100.0f);
+	m_mProjectionMatrix = perspective(60.0f, (float)w/h, 0.3f, 100.0f);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,6 +78,7 @@ void Spotlight::Update(int w, int h)
 void Spotlight::Render(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    m_pShader->Use(true);
 
 	vec4 lightPos = vec4(10.0f * cos(g_fAngle), 10.0f, 10.0f * sin(g_fAngle), 1.0f);
     m_pShader->SetUniform("SpotLight.Position", m_mViewMatrix * lightPos);

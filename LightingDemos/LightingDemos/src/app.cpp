@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 
 void Initialize(void)
 {
-	printf("******************** INITIALIZE STAGE ********************");
+	printf("******************** INITIALIZE STAGE ********************\n");
 	InitializeGL();
 	InitializeShader();
 	InitializeVAO();
@@ -109,8 +109,8 @@ void Initialize(void)
 	// g_pADS->Construct();
 
 	// Init MultiLight effect
-	g_pMultiLight = new MultiLight();
-	g_pMultiLight->Construct();
+	// g_pMultiLight = new MultiLight();
+	// g_pMultiLight->Construct();
 
 	// Init spot light effect
 	// g_pSpotlight = new Spotlight();
@@ -121,7 +121,7 @@ void Initialize(void)
 
 void InitializeGL(void)
 {
-	printf("******************** INITIALIZE OPENGL STAGE ********************");
+	printf("******************** INITIALIZE OPENGL STAGE ********************\n");
 	glClearColor(0.0f,0.0f,0.2f,0.0f); // Set background color
 	glEnable(GL_DEPTH_TEST); // We enable the depth test (also called z buffer)
 	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL); // Polygon rasterization mode
@@ -131,14 +131,14 @@ void InitializeGL(void)
 
 void InitializeShader(void)
 {
-	printf("******************** INITIALIZE SHADER STAGE ********************");
+	printf("******************** INITIALIZE SHADER STAGE ********************\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void InitializeVAO(void)
 {
-	printf("******************** INITIALIZE VAO STAGE ********************");
+	printf("******************** INITIALIZE VAO STAGE ********************\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -148,8 +148,8 @@ void OnUpdate(int w, int h)
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 	// g_pSingleLight->Update(w, h);
 	// g_pADS->Update(w,h);
-	g_pMultiLight->Update(w, h);
-	// g_pSpotlight->Update(w, h);
+	// g_pMultiLight->Update(w, h);
+	g_pSpotlight->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -158,8 +158,8 @@ void Paint(void)
 {
 	// g_pSingleLight->Render();
 	// g_pADS->Render();
-	g_pMultiLight->Render();
-	// g_pSpotlight->Render();
+	// g_pMultiLight->Render();
+	g_pSpotlight->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

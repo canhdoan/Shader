@@ -289,7 +289,7 @@ vec3 Teapot::evaluateNormal( int gridU, int gridV, float *B, float *dB, vec3 pat
             dv += patch[i][j] * B[gridU*4+i] * dB[gridV*4+j];
         }
     }
-    return glm::normalize( glm::cross( du, dv ) );
+    return normalize( cross( du, dv ) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
