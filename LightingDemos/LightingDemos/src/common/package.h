@@ -42,6 +42,9 @@ using namespace glm;
 #include "load3dobj.h"
 #include "shader.h"
 
+#define PI 3.141592653589793
+#define TWOPI 6.2831853071795862
+
 
 #endif // APP_COMMON_PACKAGE_H
 

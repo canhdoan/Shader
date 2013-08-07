@@ -18,11 +18,13 @@
 SingleLight *g_pSingleLight = NULL;
 ADSShading *g_pADS = NULL;
 MultiLight *g_pMultiLight = NULL;
+Spotlight *g_pSpotlight = NULL;
 
 // Rotate variables
-float rotation_x=0, rotation_x_increment=0.1f;
-float rotation_y=0, rotation_y_increment=0.05f;
-float rotation_z=0, rotation_z_increment=0.03f;
+float rotation_x=0.0, rotation_x_increment=0.1f;
+float rotation_y=0.0, rotation_y_increment=0.05f;
+float rotation_z=0.0, rotation_z_increment=0.03f;
+float g_fAngle = 0.0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Declare all methods
@@ -109,6 +111,10 @@ void Initialize(void)
 	// Init MultiLight effect
 	g_pMultiLight = new MultiLight();
 	g_pMultiLight->Construct();
+
+	// Init spot light effect
+	// g_pSpotlight = new Spotlight();
+	// g_pSpotlight->Construct();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,6 +149,7 @@ void OnUpdate(int w, int h)
 	// g_pSingleLight->Update(w, h);
 	// g_pADS->Update(w,h);
 	g_pMultiLight->Update(w, h);
+	// g_pSpotlight->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,6 +159,7 @@ void Paint(void)
 	// g_pSingleLight->Render();
 	// g_pADS->Render();
 	g_pMultiLight->Render();
+	// g_pSpotlight->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -165,6 +173,10 @@ void OnPaint(void)
 	if (rotation_x > 359) rotation_x = 0;
 	if (rotation_y > 359) rotation_y = 0;
 	if (rotation_z > 359) rotation_z = 0;
+
+	g_fAngle += 0.01f;
+	if(g_fAngle > TWOPI)
+		g_fAngle -= TWOPI;
 	
 	glutPostRedisplay();
 }

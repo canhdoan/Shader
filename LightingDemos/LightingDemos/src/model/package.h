@@ -14,8 +14,9 @@
 #ifndef APP_MODEL_PACKAGE_H
 #define APP_MODEL_PACKAGE_H
 
-#include "../common/package";
+#include "../common/package.h";
 
+#include "teapotdata.h"
 #include "teapot.h"
 #include "torus.h"
 #include "plane.h"

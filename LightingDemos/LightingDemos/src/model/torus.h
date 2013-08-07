@@ -17,8 +17,37 @@
 class Torus
 {
 public:
+	/**
+	 * The constructor for this class
+	 */
+	Torus(void);
+
+	/**
+	 * The destructor for this class
+	 */
+	~Torus(void);
+
+	/**
+	 * Construct method
+	 */
+	void Construct(float outerRadius, float innerRadius, int nsides, int nrings);
+
+	/**
+	 * Render method
+	 */
+	void Render(void);
 
 private:
+	void generateVerts(float * verts, float * norms, float * tex,
+                       unsigned int * el,
+                       float outerRadius, float innerRadius);
+
+private:
+	// Vertex array object
+	GLuint m_nVAO;
+	// Number of faces
+	unsigned int m_nFaces;
+	int rings, sides;
 };
 
 #endif // APP_MODEL_TORUS_H

@@ -14,13 +14,11 @@
 #ifndef APP_PACKAGE_H
 #define APP_PACKAGE_H
 
-#define PI 3.141592653589793
-#define TWOPI 6.2831853071795862
-
 #include "model/package.h"
 #include "singlelight.h"
 #include "ADSshading.h"
 #include "multilight.h"
+#include "spotlight.h"
 
 extern float rotation_x;
 extern float rotation_x_increment;
@@ -28,6 +26,7 @@ extern float rotation_y;
 extern float rotation_y_increment;
 extern float rotation_z;
 extern float rotation_z_increment;
+extern float g_fAngle;
 
 #endif // APP_PACKAGE_H
 

@@ -14,11 +14,34 @@
 #ifndef APP_MODEL_PLANE_H
 #define APP_MODEL_PLANE_H
 
-class Torus
+class Plane
 {
 public:
+	/**
+	 * The constructor for this class
+	 */
+	Plane(void);
+
+	/**
+	 * The destructor for this class
+	 */
+	~Plane(void);
+
+	/**
+	 * Construct method
+	 */
+	void Construct(float xsize, float zsize, int xdivs, int zdivs);
+
+	/**
+	 * Render method
+	 */
+	void Render(void);
 
 private:
+	// Vertex array object
+	GLuint m_nVAO;
+	// Number of faces
+	unsigned int m_nFaces;
 };
 
 #endif // APP_MODEL_PLANE_H

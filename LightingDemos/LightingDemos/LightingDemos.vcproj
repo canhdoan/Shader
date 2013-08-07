@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\spotlight.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\model\teapot.cpp"
 				>
 			</File>
@@ -238,15 +242,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\package.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\common\package.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\model\package.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\package.h"
 				>
 			</File>
 			<File
@@ -262,7 +266,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\spotlight.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\model\teapot.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\teapotdata.h"
 				>
 			</File>
 			<File
