@@ -54,6 +54,18 @@ typedef struct object_type_3ds
 	
 } OBJECT_3DS, *OBJECT_3DS_PTR;
 
+
+typedef struct object_type_obj
+{
+	int num_vertices; // Number of vertices
+	int num_polygons; // Number of polygon
+	
+	VERTEX vertex[MAX_VERTICES]; // Array of vertices
+    VERTEX normal[MAX_VERTICES]; // Array of the vertices' normals
+	TEXTCOORD textcoord[MAX_VERTICES]; // Array of U,V coordinates for texture mapping
+	POLYGON polygon[MAX_POLYGONS]; // Array of polygons (numbers that point to the vertices' list)
+}OBJECT_OBJ, *OBJECT_OBJ_PTR;
+
 #endif // APP_COMMON_OBJECT_H
 
 ///////////////////////////////////////////////////////////////////////////////

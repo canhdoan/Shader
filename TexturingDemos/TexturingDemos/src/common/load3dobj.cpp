@@ -175,9 +175,69 @@ namespace Load3DObj
 	
 	///
 
-	void LoadObjModel()
+	void LoadObjModel(char *pFileName, OBJECT_3DS_PTR pObject)
 	{
+		int vertexIndices, uvIndices, normalIndices, poligonIndices;
+		vertexIndices = 0;
+		uvIndices = 0;
+		normalIndices = 0;
+		poligonIndices = 0;
 
+		float x, y, z; // vertex coordinate
+
+		// variable for load polygon
+		float vt1, vt2, vt3, uv1, uv2, uv3, vn1, vn2,vn3;
+
+
+		FILE *file = fopen(pFileName, "rb");
+		if (file == NULL)
+		{
+			printf("ERROR: %s is not exist!\n", pFileName);
+			return;
+		}
+
+		while(1)
+		{
+			char lineHeader[128];
+			// Read the first word of line
+			int res = fscanf(file, "%s", lineHeader);
+			if (res == EOF)
+				break;
+
+			if (strcmp(lineHeader, "v") == 0)
+			{
+				fscanf(file, "%f %f %f\n", &x, &y, &z);
+				pObject->vertex[vertexIndices].x = x;
+				pObject->vertex[vertexIndices].y = y;
+				pObject->vertex[vertexIndices].z = z;
+				++vertexIndices;
+			}
+			else if (strcmp(lineHeader, "vt") == 0)
+			{
+				fscanf(file, "%f %f\n", &x, &y);
+				y = -y; // invert the v coordinate if use for *.dds texture. This line of code need to remove if use the *.bmp or *.tga texture
+				pObject->textcoord[uvIndices].u = x;
+				pObject->textcoord[uvIndices].v = y;
+				++uvIndices;
+			}
+			else if (strcmp(lineHeader, "vn") == 0)
+			{
+				fscanf(file, "%f %f %f\n", &x, &y, &z);
+				pObject->normal[normalIndices].x = x;
+				pObject->normal[normalIndices].y = y;
+				pObject->normal[normalIndices].z = z;
+				++normalIndices;
+			}
+			else if (strcmp(lineHeader, "f") == 0)
+			{
+				int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vt1, %uv1, %vn1, &vt2, %uv2, %vn2, &vt3, %uv3, %vn3);
+				if (matches != 9)
+				{
+					printf("ERROR: Can not parse polygon index!");
+					return;
+				}
+			}
+		}
 	}
 	
 	///

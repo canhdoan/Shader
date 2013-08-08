@@ -31,7 +31,7 @@ namespace Load3DObj
 	 * Load 3D model from file *.obj format, result is stored to object structure 
 	 * that it is defined in the package file
 	 */
-	void LoadObjModel(void);
+	void LoadObjModel(char *pFileName, OBJECT_3DS_PTR pObject);
 	
 	/**
 	 * Calculate normal vector
