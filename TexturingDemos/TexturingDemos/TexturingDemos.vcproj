@@ -218,15 +218,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\model\package.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\package.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\common\package.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\package.h"
 				>
 			</File>
 			<File
@@ -272,6 +272,14 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\data\shaders\default.fs"
+			>
+		</File>
+		<File
+			RelativePath=".\data\shaders\default.vs"
+			>
+		</File>
 		<File
 			RelativePath=".\data\objects\spaceship.3DS"
 			>

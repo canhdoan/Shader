@@ -101,8 +101,8 @@ void Initialize(void)
 	InitializeVAO();
 
 	// Init SingleLight effect
-	// g_pSingleLight = new SingleLight();
-	// g_pSingleLight->Construct();
+	g_pSingleLight = new SingleLight();
+	g_pSingleLight->Construct();
 
 	// Init ADS effect
 	// g_pADS = new ADSShading();
@@ -146,20 +146,20 @@ void InitializeVAO(void)
 void OnUpdate(int w, int h)
 {
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
-	// g_pSingleLight->Update(w, h);
+	g_pSingleLight->Update(w, h);
 	// g_pADS->Update(w,h);
 	// g_pMultiLight->Update(w, h);
-	g_pSpotlight->Update(w, h);
+	// g_pSpotlight->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void Paint(void)
 {
-	// g_pSingleLight->Render();
+	g_pSingleLight->Render();
 	// g_pADS->Render();
 	// g_pMultiLight->Render();
-	g_pSpotlight->Render();
+	// g_pSpotlight->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

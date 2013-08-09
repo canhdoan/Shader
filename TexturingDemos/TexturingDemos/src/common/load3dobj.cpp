@@ -181,11 +181,12 @@ namespace Load3DObj
 		vertexIndices = 0;
 		uvIndices = 0;
 		normalIndices = 0;
-		poligonIndices = 0;
+		polygonIndices = 0;
 
 		VERTEX vertex[MAX_VERTICES];
 		VERTEX normal[MAX_VERTICES];
 		TEXTCOORD textcoord[MAX_VERTICES];
+		POLYGON polygon[MAX_POLYGONS];
 
 		float x, y, z; // vertex coordinate
 
@@ -240,7 +241,42 @@ namespace Load3DObj
 					printf("ERROR: Can not parse polygon index!");
 					return;
 				}
+				
+				// Set index for vertex
+				polygon[polygonIndices].a = vt1;
+				polygon[polygonIndices].b = uv1;
+				polygon[polygonIndices++].c = vn1;
+				
+				polygon[polygonIndices].a = vt2;
+				polygon[polygonIndices].b = uv2;
+				polygon[polygonIndices++].c = vn2;
+				
+				polygon[polygonIndices].a = vt3;
+				polygon[polygonIndices].b = uv3;
+				polygon[polygonIndices++].c = vn3;
 			}
+		}
+		
+		// Update the vertex array, normal array and texture coordinate array
+		for (int i = 0; i < polygonIndices; i++)
+		{
+			pObject->vertex[i] = vertex[polygon[i].a];
+			pObject->normal[i] = normal[polygon[i].b];
+			pObject->textcoord[i] = textcoord[polygon[i].c];
+			
+			pObject->vertex[i + 1] = vertex[polygon[i + 1].a];
+			pObject->normal[i + 1] = normal[polygon[i + 1].b];
+			pObject->textcoord[i + 1] = textcoord[polygon[i + 1].c];
+			
+			pObject->vertex[i + 2] = vertex[polygon[i + 2].a];
+			pObject->normal[i + 2] = normal[polygon[i + 2].b];
+			pObject->textcoord[i + 2] = textcoord[polygon[i + 2].c];
+			
+			pObject->polygon[i].a = i;
+			pObject->polygon[i].b = i + 1;
+			pObject->polygon[i].c = i + 2;
+			
+			i += 3;
 		}
 	}
 	
