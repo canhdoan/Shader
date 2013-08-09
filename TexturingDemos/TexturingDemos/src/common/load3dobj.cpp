@@ -183,6 +183,10 @@ namespace Load3DObj
 		normalIndices = 0;
 		poligonIndices = 0;
 
+		VERTEX vertex[MAX_VERTICES];
+		VERTEX normal[MAX_VERTICES];
+		TEXTCOORD textcoord[MAX_VERTICES];
+
 		float x, y, z; // vertex coordinate
 
 		// variable for load polygon
@@ -207,25 +211,25 @@ namespace Load3DObj
 			if (strcmp(lineHeader, "v") == 0)
 			{
 				fscanf(file, "%f %f %f\n", &x, &y, &z);
-				pObject->vertex[vertexIndices].x = x;
-				pObject->vertex[vertexIndices].y = y;
-				pObject->vertex[vertexIndices].z = z;
+				vertex[vertexIndices].x = x;
+				vertex[vertexIndices].y = y;
+				vertex[vertexIndices].z = z;
 				++vertexIndices;
 			}
 			else if (strcmp(lineHeader, "vt") == 0)
 			{
 				fscanf(file, "%f %f\n", &x, &y);
-				y = -y; // invert the v coordinate if use for *.dds texture. This line of code need to remove if use the *.bmp or *.tga texture
-				pObject->textcoord[uvIndices].u = x;
-				pObject->textcoord[uvIndices].v = y;
+				// y = -y; // invert the v coordinate if use for *.dds texture. This line of code need to remove if use the *.bmp or *.tga texture
+				textcoord[uvIndices].u = x;
+				textcoord[uvIndices].v = y;
 				++uvIndices;
 			}
 			else if (strcmp(lineHeader, "vn") == 0)
 			{
 				fscanf(file, "%f %f %f\n", &x, &y, &z);
-				pObject->normal[normalIndices].x = x;
-				pObject->normal[normalIndices].y = y;
-				pObject->normal[normalIndices].z = z;
+				normal[normalIndices].x = x;
+				normal[normalIndices].y = y;
+				normal[normalIndices].z = z;
 				++normalIndices;
 			}
 			else if (strcmp(lineHeader, "f") == 0)
