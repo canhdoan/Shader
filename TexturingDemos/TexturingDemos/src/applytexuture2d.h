@@ -41,8 +41,45 @@ public:
 	/**
 	 * Terminate 
 	 */
+	void Terminate(void);
+
+	/**
+	 * Update
+	 */
+	void Update(int w, int h);
+
+	/**
+	 * Render
+	 */
+	void Render(void);
+
+
+	/**
+	 * Set matrices
+	 */
+	void SetMatrices(void);
+
 
 private:
+	// Shader program
+	Shader 				*m_pShader;
+	// 3D object model
+	OBJECT_OBJ 			m_Object;
+	// Vertex array and vertex buffer object
+	GLuint 				m_nVAO;
+	GLuint 				m_nVertexVBO;
+	GLuint 				m_nNormalVBO;
+	GLuint 				m_nUVVBO;
+	GLuint 				m_nIndicesVBO;
+	// List attributes location
+	GLuint 				m_nVertexLoc;
+	GLuint				m_nNormalLoc;
+	GLuint				m_nUVLoc;
+	// Matrices transform
+	mat4				m_mViewMatrix;
+	mat4	 			m_mModelMatrix;
+	mat4				m_mProjectionMatrix;
+	mat3 				m_mNormalMatrix;
 };
 
 

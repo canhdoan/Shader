@@ -177,6 +177,11 @@ namespace Load3DObj
 
 	void LoadObjModel(char *pFileName, OBJECT_3DS_PTR pObject)
 	{
+		// Reset
+		pObject->num_vertices = 0;
+		pObject->num_polygons = 0;
+
+		// Internal variables
 		int vertexIndices, uvIndices, normalIndices, poligonIndices;
 		vertexIndices = 0;
 		uvIndices = 0;
@@ -258,26 +263,52 @@ namespace Load3DObj
 		}
 		
 		// Update the vertex array, normal array and texture coordinate array
-		for (int i = 0; i < polygonIndices; i++)
+		for (int i = 0; i < polygonIndices; )
 		{
-			pObject->vertex[i] = vertex[polygon[i].a];
-			pObject->normal[i] = normal[polygon[i].b];
-			pObject->textcoord[i] = textcoord[polygon[i].c];
+			// Set vertex coordinate, normal and texture coordinate for fisrt vertex of triangle
+			pObject->vertex[i].x = vertex[polygon[i].a].x;
+			pObject->vertex[i].y = vertex[polygon[i].a].y;
+			pObject->vertex[i].z = vertex[polygon[i].a].z;
+
+			pObject->textcoord[i].u = textcoord[polygon[i].b].u;
+			pObject->textcoord[i].v = textcoord[polygon[i].b].v;
+
+			pObject->normal[i].x = normal[polygon[i].c].x;
+			pObject->normal[i].y = normal[polygon[i].c].y;
+			pObject->normal[i].z = normal[polygon[i].c].z;
+			// Set vertex coordinate, normal and texture coordinate for second vertex of triangle
+			pObject->vertex[i+1].x = vertex[polygon[i+1].a].x;
+			pObject->vertex[i+1].y = vertex[polygon[i+1].a].y;
+			pObject->vertex[i+1].z = vertex[polygon[i+1].a].z;
+
+			pObject->textcoord[i+1].u = textcoord[polygon[i+1].b].u;
+			pObject->textcoord[i+1].v = textcoord[polygon[i+1].b].v;
 			
-			pObject->vertex[i + 1] = vertex[polygon[i + 1].a];
-			pObject->normal[i + 1] = normal[polygon[i + 1].b];
-			pObject->textcoord[i + 1] = textcoord[polygon[i + 1].c];
+			pObject->normal[i+1].x = normal[polygon[i+1].c].x;
+			pObject->normal[i+1].y = normal[polygon[i+1].c].y;
+			pObject->normal[i+1].z = normal[polygon[i+1].c].z;
+			// Set vertex coordinate, normal and texture coordinate for third vertex of triangle
+			pObject->vertex[i+2].x = vertex[polygon[i+2].a].x;
+			pObject->vertex[i+2].y = vertex[polygon[i+2].a].y;
+			pObject->vertex[i+2].z = vertex[polygon[i+2].a].z;
+
+			pObject->textcoord[i+2].u = textcoord[polygon[i+2].b].u;
+			pObject->textcoord[i+2].v = textcoord[polygon[i+2].b].v;
 			
-			pObject->vertex[i + 2] = vertex[polygon[i + 2].a];
-			pObject->normal[i + 2] = normal[polygon[i + 2].b];
-			pObject->textcoord[i + 2] = textcoord[polygon[i + 2].c];
-			
+			pObject->normal[i+2].x = normal[polygon[i+2].c].x;
+			pObject->normal[i+2].y = normal[polygon[i+2].c].y;
+			pObject->normal[i+2].z = normal[polygon[i+2].c].z;
+			// Set index for triangle
 			pObject->polygon[i].a = i;
 			pObject->polygon[i].b = i + 1;
 			pObject->polygon[i].c = i + 2;
-			
+			// Increase number of polygon
+			pObject->num_polygons++;
+
 			i += 3;
 		}
+		//Set number of vertices
+		pObject->num_vertices = polygonIndices;
 	}
 	
 	///
