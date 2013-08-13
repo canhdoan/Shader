@@ -91,7 +91,7 @@ void ApplyTexture2D::Construct(void)
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*2*m_Object.num_vertices, 
 			&m_Object.textcoord[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(m_nUVLoc);
-		glVertexAttribPointer(m_nUVLoc, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*3, 0);
+		glVertexAttribPointer(m_nUVLoc, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2, 0);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_nIndicesVBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort)*3*m_Object.num_polygons,
