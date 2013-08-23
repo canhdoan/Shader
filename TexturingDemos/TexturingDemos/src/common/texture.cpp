@@ -84,6 +84,113 @@ namespace Texture
 
 	    return textureID;
 	}
+
+	RGBbytepixel* BMP_Loader(const char *filename)
+	{
+		FILE *fp;
+		sBMP_header *header;
+		sBMP_info *info;
+		DWORD_ alignedBytesPerScanline;
+		DWORD_ fileSize;
+		BYTE_ *fileBuffer;
+		BYTE_ *data;
+		DWORD_ i, x, y;
+		RGBbytepixel *pixel;
+		RGBbytepixel *pixmap;
+
+		if( (fp = fopen(filename, "rb")) == NULL )
+		{
+			return(NULL);
+		}
+
+		// Move fp to the end.
+		fseek( fp, 0 ,SEEK_END );
+		
+		// get the file size.
+		fileSize = (DWORD_)ftell( fp );
+
+		// Move fp to the beginning.
+		fseek( fp, 0 ,SEEK_SET );
+
+		// Alloc a buffer to store the whole file
+		fileBuffer = (BYTE_ *)malloc( fileSize * sizeof(BYTE_) );
+		if( fileBuffer==NULL )
+		{
+			return(NULL);
+		}
+
+		// Read file entirely.
+		fread( fileBuffer, fileSize * sizeof(BYTE_), 1, fp );
+
+		// Ok, the is in buffer, so we can close the file.
+		fclose( fp );
+
+		// Retrieval of bmp file header structure.
+		header = (sBMP_header *)fileBuffer;
+
+		// Retrieval of bmp file info structure.
+		info = (sBMP_info *)(fileBuffer + 14 );
+
+
+		// Check right format. //////////////////////////////////////////////////////
+
+		if(info->LargeurImage != 256 || info->HauteurImage !=256 )
+		{
+			free( fileBuffer );
+			printf( "\nLoading image failed. Must be 256x256." );
+			return(NULL);
+		}
+
+		if(info->BitParPixel != 24 ) 
+		{
+			free( fileBuffer );
+			printf( "\nLoading image failed. Must be 24 bits/pixels." );
+			return(NULL);
+		}
+
+		if(info->FormatCompressImage != 0 )
+		{
+			free( fileBuffer );
+			return(NULL);
+		}
+
+		// Retrieval bmp data.
+		data = (BYTE_ *)(fileBuffer + 14 + 40 );
+
+		// Allocate a buffer to store the bitmap data.
+		pixmap = new RGBbytepixel[info->LargeurImage * info->HauteurImage];
+		if( pixmap==NULL )
+		{
+			free( fileBuffer );
+			return(NULL);
+		}
+
+
+		// Compute the aligned bytes per scanline.
+		alignedBytesPerScanline = (((info->LargeurImage * 24) + 31) & ~31) >> 3;
+
+		i=0;
+		for( y = 0; y < info->HauteurImage; y++ )
+		{
+			pixel = (RGBbytepixel *)(data + (y * alignedBytesPerScanline));
+
+			for( x=0; x<info->LargeurImage; x++ )
+			{
+				( (RGBbytepixel*)pixmap + i )->m_R = pixel->m_B; 
+				( (RGBbytepixel*)pixmap + i )->m_G = pixel->m_G; 
+				( (RGBbytepixel*)pixmap + i )->m_B = pixel->m_R; 
+				i++;
+				pixel++;
+			}
+		}
+
+		g_texture_width = info->LargeurImage;
+		g_texture_height = info->HauteurImage;
+
+		free( fileBuffer );
+
+		return(pixmap);
+	}
 };
 
 
