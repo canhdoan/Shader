@@ -214,50 +214,50 @@ int Shader::GetSubroutine(GLSLShader::GLSLShaderType type, const char *pSub)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Shader::SetUniform(const char *szName, const glm::vec3 &v)
+void Shader::SetUniform(const char *szName, const vec3 &v)
 {
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
 		printf("DEBUG: The %s uniform not exist.\n", szName);
 	else
-		glUniform3fv(nUniformLoc, 1, glm::value_ptr(v));
+		glUniform3fv(nUniformLoc, 1, value_ptr(v));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Shader::SetUniform(const char *szName, const glm::vec4 &v)
+void Shader::SetUniform(const char *szName, const vec4 &v)
 {
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
 		printf("DEBUG: The %s uniform not exist.\n", szName);
 	else
-		glUniform4fv(nUniformLoc, 1, glm::value_ptr(v));
+		glUniform4fv(nUniformLoc, 1, value_ptr(v));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Shader::SetUniform(const char *szName, const glm::mat3 &m)
+void Shader::SetUniform(const char *szName, const mat3 &m)
 {
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
 		printf("DEBUG: The %s uniform not exist.\n", szName);
 	else
-		glUniformMatrix3fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+		glUniformMatrix3fv(nUniformLoc, 1, GL_FALSE, value_ptr(m));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Shader::SetUniform(const char *szName, const glm::mat4 &m)
+void Shader::SetUniform(const char *szName, const mat4 &m)
 {
 	// Get location of uniform
 	int nUniformLoc = GetUniformLocation(szName);
 	if (nUniformLoc < 0)
 		printf("DEBUG: The %s uniform not exist.\n", szName);
 	else
-		glUniformMatrix4fv(nUniformLoc, 1, GL_FALSE, glm::value_ptr(m));
+		glUniformMatrix4fv(nUniformLoc, 1, GL_FALSE, value_ptr(m));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

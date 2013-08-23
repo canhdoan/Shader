@@ -15,6 +15,7 @@
 #define APP_PACKAGE_H
 
 #include "model/package.h"
+#include "applytexture2d.h"
 
 extern float rotation_x;
 extern float rotation_x_increment;

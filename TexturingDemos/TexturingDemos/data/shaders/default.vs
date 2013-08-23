@@ -23,7 +23,7 @@ attribute vec2 attr_uv;
 ///////////////////////////////////////////////////////////////////////////////
 // Uniform
 uniform mat4 uni_mvmatrix;		// The model-view matrix
-uniform mat4 uni_normalmatrix;	// The normal matrix
+uniform mat3 uni_normalmatrix;	// The normal matrix
 uniform mat4 uni_mvpmatrix;		// The model-view-projection matrix
 
 
@@ -39,5 +39,5 @@ void main()
 	vary_uv = attr_uv;
 
 	// Set the vertex coordinate to gl_Position after transform to clip-space
-	gl_Position = uni_mvpmatrix * attr_vertex;
+	gl_Position = uni_mvpmatrix * vec4(attr_vertex, 1.0);
 }

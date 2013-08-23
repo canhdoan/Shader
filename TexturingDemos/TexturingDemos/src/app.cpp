@@ -15,7 +15,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Variables
-
+ApplyTexture2D		*m_pApplyTexture2D = NULL;
 
 // Rotate variables
 float rotation_x=0.0, rotation_x_increment=0.1f;
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(1024,768);
-	glutCreateWindow("Lighting Demo by Canh Doan ^^");
+	glutCreateWindow("Texture Demo by Canh Doan ^^");
 
 	// Init function handle
 	glutReshapeFunc(OnUpdate);
@@ -94,8 +94,8 @@ void Initialize(void)
 {
 	printf("******************** INITIALIZE STAGE ********************\n");
 	InitializeGL();
-	InitializeShader();
-	InitializeVAO();
+	// InitializeShader();
+	// InitializeVAO();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -106,6 +106,9 @@ void InitializeGL(void)
 	glClearColor(0.0f,0.0f,0.2f,0.0f); // Set background color
 	glEnable(GL_DEPTH_TEST); // We enable the depth test (also called z buffer)
 	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL); // Polygon rasterization mode
+
+	m_pApplyTexture2D = new ApplyTexture2D();
+	m_pApplyTexture2D->Construct();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,12 +130,14 @@ void InitializeVAO(void)
 void OnUpdate(int w, int h)
 {
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+	m_pApplyTexture2D->Update(w, h);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void Paint(void)
 {
+	m_pApplyTexture2D->Render();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

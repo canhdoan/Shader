@@ -53,7 +53,6 @@ public:
 	 */
 	void Render(void);
 
-
 	/**
 	 * Set matrices
 	 */
@@ -64,7 +63,7 @@ private:
 	// Shader program
 	Shader 				*m_pShader;
 	// 3D object model
-	OBJECT_OBJ 			m_Object;
+	OBJECT_3DS 			m_Object;
 	// Vertex array and vertex buffer object
 	GLuint 				m_nVAO;
 	GLuint 				m_nVertexVBO;

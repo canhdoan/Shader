@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\applytexture2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\load3dobj.cpp"
 				>
 			</File>
@@ -210,6 +214,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\src\applytexture2d.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\load3dobj.h"
 				>
 			</File>
@@ -218,7 +226,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\package.h"
+				RelativePath=".\src\model\package.h"
 				>
 			</File>
 			<File
@@ -226,7 +234,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\model\package.h"
+				RelativePath=".\src\package.h"
 				>
 			</File>
 			<File
@@ -268,6 +276,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\data\textures\skull.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\data\textures\spaceshiptexture.bmp"
 				>
 			</File>
@@ -278,6 +290,10 @@
 		</File>
 		<File
 			RelativePath=".\data\shaders\default.vs"
+			>
+		</File>
+		<File
+			RelativePath=".\data\objects\fighter1.3ds"
 			>
 		</File>
 		<File

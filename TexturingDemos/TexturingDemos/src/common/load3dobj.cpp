@@ -182,7 +182,7 @@ namespace Load3DObj
 		pObject->num_polygons = 0;
 
 		// Internal variables
-		int vertexIndices, uvIndices, normalIndices, poligonIndices;
+		int vertexIndices, uvIndices, normalIndices, polygonIndices;
 		vertexIndices = 0;
 		uvIndices = 0;
 		normalIndices = 0;
@@ -240,7 +240,7 @@ namespace Load3DObj
 			}
 			else if (strcmp(lineHeader, "f") == 0)
 			{
-				int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vt1, %uv1, %vn1, &vt2, %uv2, %vn2, &vt3, %uv3, %vn3);
+				int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vt1, &uv1, &vn1, &vt2, &uv2, &vn2, &vt3, &uv3, &vn3);
 				if (matches != 9)
 				{
 					printf("ERROR: Can not parse polygon index!");

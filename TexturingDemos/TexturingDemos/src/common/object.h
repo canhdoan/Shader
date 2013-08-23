@@ -64,6 +64,8 @@ typedef struct object_type_obj
     VERTEX normal[MAX_VERTICES]; // Array of the vertices' normals
 	TEXTCOORD textcoord[MAX_VERTICES]; // Array of U,V coordinates for texture mapping
 	POLYGON polygon[MAX_POLYGONS]; // Array of polygons (numbers that point to the vertices' list)
+
+	unsigned int texture_id; // Number of the texture
 }OBJECT_OBJ, *OBJECT_OBJ_PTR;
 
 #endif // APP_COMMON_OBJECT_H
