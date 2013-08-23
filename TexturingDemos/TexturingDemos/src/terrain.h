@@ -52,10 +52,17 @@ public:
 
 
 private:
-	// 
-	float		*m_pTerrain;
-	//
+	// Terrain pointer
+	float		m_pTerrain[256 * 256];
+
+	// Map pixel
 	RGBbytepixel *m_pPixelMap;
+
+	// Verticale scale value
+	float 		m_fVerticlaScale;
+
+	// number of subdivision
+	int 		m_nTerrainSubdivision;
 };
 
 
