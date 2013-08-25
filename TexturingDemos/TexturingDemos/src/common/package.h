@@ -42,6 +42,8 @@ using namespace glm;
 #include "load3dobj.h"
 #include "shader.h"
 #include "RGBbytepixel.h"
+#include "heightmap.h"
+#include "mesh.h"
 
 #define PI 3.141592653589793
 #define TWOPI 6.2831853071795862
@@ -89,6 +91,23 @@ struct sImageBMP
 };
 
 //--------------------------- BMP Structures END --------------------------
+
+//-------------------- Vertex and Face structure START --------------------
+
+struct sVertex
+{
+	vec3 vPosition; // postion
+	vec3 vNormal; // normal
+	vec2 vUV; // texture coordinate
+};
+
+struct sFace
+{
+	DWORD_ a, b, c; // indices of triangle
+	vec3 vNormal; // normal of face
+};
+
+//-------------------- Vertex and Face structures END ---------------------
 
 
 #endif // APP_COMMON_PACKAGE_H

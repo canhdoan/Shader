@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\common\mesh.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\model\plane.cpp"
 				>
 			</File>
@@ -193,6 +197,10 @@
 			</File>
 			<File
 				RelativePath=".\src\model\teapot.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\terrain.cpp"
 				>
 			</File>
 			<File
@@ -222,15 +230,11 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\common\mesh.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\common\object.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\model\package.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\common\package.h"
 				>
 			</File>
 			<File
@@ -238,7 +242,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\common\package.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\model\package.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\model\plane.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\common\RGBbytepixel.h"
 				>
 			</File>
 			<File
@@ -251,6 +267,10 @@
 			</File>
 			<File
 				RelativePath=".\src\model\teapotdata.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\terrain.h"
 				>
 			</File>
 			<File
