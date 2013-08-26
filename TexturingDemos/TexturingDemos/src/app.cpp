@@ -23,6 +23,12 @@ float rotation_y=0.0, rotation_y_increment=0.05f;
 float rotation_z=0.0, rotation_z_increment=0.03f;
 float g_fAngle = 0.0;
 
+float random(float min, float max)
+{
+    // Returns a random number in range [min,max].
+    return min + (max - min)*(float)rand() / (float)(RAND_MAX));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Declare all methods
 

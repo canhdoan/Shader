@@ -49,7 +49,16 @@ public:
 	float GetHeightAtIndex(int &nX, int &nZ);
 	void GetNormalAt(float &fX, float &fZ, vec3 &vNormal);
 	void GetNormalAtIndex(int &nX, int &nZ, vec &vNormal);
-	float GetHeightAtIndex(int &nX, int &nZ);
+	
+	/**
+	 * Method return the index of height map from the height map coordinate
+	 * that it's pass through nX & nZ. This method works around the height map
+	 * have coordinate large than height map size.
+	 *
+	 * @param nX: the x coordinate of height map
+	 * @param nZ: the z coordinate of height map
+	 */
+	int GetHeightIndexAt(int &nX, int &nZ);
 
 
 private:
