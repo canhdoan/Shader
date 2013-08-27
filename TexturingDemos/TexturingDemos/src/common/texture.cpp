@@ -85,7 +85,7 @@ namespace Texture
 	    return textureID;
 	}
 
-	RGBbytepixel* BMP_Loader(const char *filename)
+	/*RGBbytepixel* BMP_Loader(const char *filename)
 	{
 		FILE *fp;
 		sBMP_header *header;
@@ -190,7 +190,13 @@ namespace Texture
 		free( fileBuffer );
 
 		return(pixmap);
-	}
+	}*/
+	
+	
+	/*GLuint LoadJpgTexture(const char *pImage)
+	{
+		
+	}*/
 };
 
 

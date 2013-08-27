@@ -44,11 +44,12 @@ public:
 	 */
 	int GetSize(void) { return m_nSize; }
 	int GetGridSpacing(void) { return m_nGridSpacing; }
+	float GetHeightScale(void) { return m_fVerticalScale; }
 	float *GetHeight(void) { return m_pHeightMap; }
 	float GetHeightAt(float &fX, float &fZ);
-	float GetHeightAtIndex(int &nX, int &nZ);
-	void GetNormalAt(float &fX, float &fZ, vec3 &vNormal);
-	void GetNormalAtIndex(int &nX, int &nZ, vec &vNormal);
+	float GetHeightAtPixel(int nX, int nZ);
+	void GetNormalAt(float fX, float fZ, vec3 &vNormal);
+	void GetNormalAtPixel(int nX, int nZ, vec3 &vNormal);
 	
 	/**
 	 * Method return the index of height map from the height map coordinate
@@ -58,15 +59,15 @@ public:
 	 * @param nX: the x coordinate of height map
 	 * @param nZ: the z coordinate of height map
 	 */
-	int GetHeightIndexAt(int &nX, int &nZ);
+	int GetHeightIndexAt(int nX, int nZ);
 
-
-private:
 	/**
 	 * Generation height map use the Diamond Square algorithm
 	 */
 	void GenerationDiamondSquareFractal(void);
 
+	
+private:
 	/**
 	 * Blur function for heightmap
 	 */

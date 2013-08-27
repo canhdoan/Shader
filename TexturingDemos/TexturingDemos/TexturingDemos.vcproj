@@ -180,11 +180,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\common\load3dobj.cpp"
+				RelativePath=".\src\common\heightmap.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\common\mesh.cpp"
+				RelativePath=".\src\common\load3dobj.cpp"
 				>
 			</File>
 			<File
@@ -226,11 +226,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\common\load3dobj.h"
+				RelativePath=".\src\common\heightmap.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\common\mesh.h"
+				RelativePath=".\src\common\load3dobj.h"
 				>
 			</File>
 			<File
@@ -238,7 +238,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\package.h"
+				RelativePath=".\src\model\package.h"
 				>
 			</File>
 			<File
@@ -246,15 +246,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\model\package.h"
+				RelativePath=".\src\package.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\model\plane.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\common\RGBbytepixel.h"
 				>
 			</File>
 			<File
@@ -296,7 +292,39 @@
 				>
 			</File>
 			<File
+				RelativePath=".\data\textures\dirt.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\dirt.JPG"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\grass.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\grass.JPG"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\rock.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\rock.JPG"
+				>
+			</File>
+			<File
 				RelativePath=".\data\textures\skull.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\snow.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\data\textures\snow.JPG"
 				>
 			</File>
 			<File
@@ -318,6 +346,14 @@
 		</File>
 		<File
 			RelativePath=".\data\objects\spaceship.3DS"
+			>
+		</File>
+		<File
+			RelativePath=".\data\shaders\terrain.fs"
+			>
+		</File>
+		<File
+			RelativePath=".\data\shaders\terrain.vs"
 			>
 		</File>
 	</Files>

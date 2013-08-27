@@ -41,54 +41,52 @@ using namespace glm;
 #include "object.h"
 #include "load3dobj.h"
 #include "shader.h"
-#include "RGBbytepixel.h"
 #include "heightmap.h"
-#include "mesh.h"
 
 #define PI 3.141592653589793
 #define TWOPI 6.2831853071795862
 
 ///////////////////////////////////////////////////////////////////////////////
 // Structure defination
-typedef unsigned long DWORD_;		// 32 bits
-typedef unsigned short WORD_;		// 16 bits
-typedef unsigned char BYTE_;		// 8bits
+//typedef unsigned long DWORD_;		// 32 bits
+//typedef unsigned short WORD_;		// 16 bits
+//typedef unsigned char BYTE_;		// 8bits
 
 
 //--------------------------- BMP Structures START --------------------------
 
-struct sBMP_header
-{
-	WORD_ codmag;
-	DWORD_ taille;
-	WORD_ reserv1;
-	WORD_ reserv2;
-	DWORD_ offsetImage;
-};
-
-
-struct sBMP_info
-{
-	DWORD_ TailleZoneInfo;
-	DWORD_ LargeurImage;
-	DWORD_ HauteurImage;
-	WORD_ Nb_plans;								// toujours 1
-	WORD_ BitParPixel;							// 1/4/8/24
-	DWORD_ FormatCompressImage;
-	DWORD_ TailleOctets;
-	DWORD_ ResolutionHorizon;					// pixel par mètres
-	DWORD_ ResolutionVertical;					// pixel par mètres
-	DWORD_ NbCouleurUtil;						// 0 = maximum  si 24 bits alors ce champ spécifie taille palette
-	DWORD_ NbIndexCouleur;						// 0 = toutes les couleur importantes						
-};
-
-
-struct sImageBMP
-{
-	sBMP_header header;
-	sBMP_info info;
-	cRGB_Byte_Pixel *data;
-};
+//struct sBMP_header
+//{
+//	WORD_ codmag;
+//	DWORD_ taille;
+//	WORD_ reserv1;
+//	WORD_ reserv2;
+//	DWORD_ offsetImage;
+//};
+//
+//
+//struct sBMP_info
+//{
+//	DWORD_ TailleZoneInfo;
+//	DWORD_ LargeurImage;
+//	DWORD_ HauteurImage;
+//	WORD_ Nb_plans;								// toujours 1
+//	WORD_ BitParPixel;							// 1/4/8/24
+//	DWORD_ FormatCompressImage;
+//	DWORD_ TailleOctets;
+//	DWORD_ ResolutionHorizon;					// pixel par mètres
+//	DWORD_ ResolutionVertical;					// pixel par mètres
+//	DWORD_ NbCouleurUtil;						// 0 = maximum  si 24 bits alors ce champ spécifie taille palette
+//	DWORD_ NbIndexCouleur;						// 0 = toutes les couleur importantes						
+//};
+//
+//
+//struct sImageBMP
+//{
+//	sBMP_header header;
+//	sBMP_info info;
+//	cRGB_Byte_Pixel *data;
+//};
 
 //--------------------------- BMP Structures END --------------------------
 
@@ -101,10 +99,18 @@ struct sVertex
 	vec2 vUV; // texture coordinate
 };
 
-struct sFace
+//struct sFace
+//{
+//	DWORD_ a, b, c; // indices of triangle
+//	vec3 vNormal; // normal of face
+//};
+
+struct TerrainRegion
 {
-	DWORD_ a, b, c; // indices of triangle
-	vec3 vNormal; // normal of face
+    float min;
+    float max;
+    GLuint texture;
+    string filename;
 };
 
 //-------------------- Vertex and Face structures END ---------------------
@@ -112,7 +118,7 @@ struct sFace
 static float RandomInRange(float min, float max)
 {
 	// Returns a random number in range [min,max].
-    return (min + (max - min)) * ((float)(rand()) / (float)(RAND_MAX)));
+    return (min + (max - min)) * ((float)(rand()) / (float)(RAND_MAX));
 }
 
 #endif // APP_COMMON_PACKAGE_H

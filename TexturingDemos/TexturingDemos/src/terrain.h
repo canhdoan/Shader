@@ -35,7 +35,7 @@ public:
 	/**
 	 * The terminal method
 	 */
-	void Terminale(void);
+	void Terminal(void);
 
 
 public:

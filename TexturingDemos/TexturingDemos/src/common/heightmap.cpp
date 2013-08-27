@@ -61,23 +61,14 @@ float HeightMap::GetHeightAt(float &fX, float &fZ)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-float HeightMap::GetHeightAtIndex(int &nX, int &nZ)
+float HeightMap::GetHeightAtPixel(int nX, int nZ)
 {
-	return 0.0f;
+	return m_pHeightMap[nZ * m_nSize + nX];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void HeightMap::GetNormalAt(float &fX, float &fZ, vec3 &vNormal)
-{
-	vNormal.x = 0.0f;
-	vNormal.y = 0.0f;
-	vNormal.z = 0.0f;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void HeightMap::GetNormalAtIndex(int &nX, int &nZ, vec3 &vNormal)
+void HeightMap::GetNormalAt(float fX, float fZ, vec3 &vNormal)
 {
 	vNormal.x = 0.0f;
 	vNormal.y = 0.0f;
@@ -86,7 +77,29 @@ void HeightMap::GetNormalAtIndex(int &nX, int &nZ, vec3 &vNormal)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int HeightMap::GetHeightIndexAt(int &nX, int &nZ)
+void HeightMap::GetNormalAtPixel(int x, int z, vec3 &vNormal)
+{
+	if (x > 0 && x < m_nSize - 1)
+        vNormal.x = GetHeightAtPixel(x - 1, z) - GetHeightAtPixel(x + 1, z);
+    else if (x > 0)
+        vNormal.x = 2.0f * (GetHeightAtPixel(x - 1, z) - GetHeightAtPixel(x, z));
+    else
+        vNormal.x = 2.0f * (GetHeightAtPixel(x, z) - GetHeightAtPixel(x + 1, z));
+
+    if (z > 0 && z < m_nSize - 1)
+        vNormal.z = GetHeightAtPixel(x, z - 1) - GetHeightAtPixel(x, z + 1);
+    else if (z > 0)
+        vNormal.z = 2.0f * (GetHeightAtPixel(x, z - 1) - GetHeightAtPixel(x, z));
+    else
+        vNormal.z = 2.0f * (GetHeightAtPixel(x, z) - GetHeightAtPixel(x, z + 1));
+
+    vNormal.y = 2.0f * m_nGridSpacing;
+    vNormal = normalize(vNormal);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+int HeightMap::GetHeightIndexAt(int nX, int nZ)
 {
 	return (((nX + m_nSize) % m_nSize) + ((nZ + m_nSize) % m_nSize) * m_nSize);
 }
@@ -126,8 +139,8 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
 					+ ((m_pHeightMap[nP1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
 
-				fMinH = min(fMinH, m_pHeightMap[nPmid]);
-                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
+				fMinH = std::min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = std::max(fMaxH, m_pHeightMap[nPmid]);
 			}
 		}
 		
@@ -145,8 +158,8 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
 					+ ((m_pHeightMap[nP1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
 
-				fMinH = min(fMinH, m_pHeightMap[nPmid]);
-                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
+				fMinH = std::min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = std::max(fMaxH, m_pHeightMap[nPmid]);
 
 				nP1 = GetHeightIndexAt(x, z);
 				nP2 = GetHeightIndexAt(x, z + w);
@@ -155,10 +168,10 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 				nPmid = GetHeightIndexAt(x, z + w/2);
 
 				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
-					+ ((m_pHeightMap[p1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
+					+ ((m_pHeightMap[nP1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
 
-				fMinH = min(fMinH, m_pHeightMap[nPmid]);
-                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
+				fMinH = std::min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = std::max(fMaxH, m_pHeightMap[nPmid]);
 			}
 		}
 	}

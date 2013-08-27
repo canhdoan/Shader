@@ -26,7 +26,21 @@ namespace Texture
 	 * @param pImage: the path of bitmap file
 	 */
 	GLuint LoadBmpTexture(const char *pImage);
-
+	
+	/**
+	 * Load bitmap texture method
+	 *
+	 * @param pImage: the path of bitmap file
+	 * @return a RGBbytepixel pointer
+	 */
+	//RGBbytepixel* BMP_Loader(const char *filename);
+	
+	/**
+	 * Load jpg texture method
+	 *
+	 * @param pImage: patch of bitmap file
+	 */
+	//GLuint LoadJpgTexture(const char *pImage);
 };
 
 #endif // APP_COMMON_TEXTURE_H
