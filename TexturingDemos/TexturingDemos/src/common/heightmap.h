@@ -30,7 +30,7 @@ public:
 	/**
 	 * The construct method
 	 */
-	void Construct(void);
+	void Construct(int nSize, int nGrid, float fVerScale);
 
 	/**
 	 * The terminal method

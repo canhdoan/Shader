@@ -16,6 +16,7 @@
 
 #include "model/package.h"
 #include "applytexture2d.h"
+#include "terrain.h"
 
 extern float rotation_x;
 extern float rotation_x_increment;

@@ -109,6 +109,11 @@ struct sFace
 
 //-------------------- Vertex and Face structures END ---------------------
 
+static float RandomInRange(float min, float max)
+{
+	// Returns a random number in range [min,max].
+    return (min + (max - min)) * ((float)(rand()) / (float)(RAND_MAX)));
+}
 
 #endif // APP_COMMON_PACKAGE_H
 

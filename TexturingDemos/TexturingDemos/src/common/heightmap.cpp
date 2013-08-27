@@ -99,10 +99,10 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 	int w, x, z;
 	float dH, dHFactor;
 	int nP1, nP2, nP3, nP4, nPmid;
-	//float fMinH, fMaxH;
+	float fMinH, fMaxH;
 	dH = m_nSize * 0.5f; // dH is length of height map in one dimension
 	dHFactor = pow(2.0f, -ROUGHNESS);
-	//fMinH = fMaxH = 0.0f;
+	fMinH = fMaxH = 0.0f;
 	
 	// Fill initial value for height map
 	for (w = 0 ; w < m_nSize*m_nSize ; ++w)
@@ -111,9 +111,9 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 	for (w = m_nSize ; w > 0 ; w /= 2, dH *= dHFactor)
 	{
 		// Diamond stage
-		for (z = 0; z < m_nSize; ++z)
+		for (z = 0; z < m_nSize; z += w)
 		{
-			for (x = 0; x < m_nSize; ++x)
+			for (x = 0; x < m_nSize; x += w)
 			{
 				nP1 = GetHeightIndexAt(x, z);
 				nP2 = GetHeightIndexAt(x + w, z);
@@ -121,19 +121,51 @@ void HeightMap::GenerationDiamondSquareFractal(void)
 				nP4 = GetHeightIndexAt(x + w, z + w);
 				nPmid = GetHeightIndexAt(x + w/2, z + w/2);
 				
-				m_pHeightMap[nPmid] = 
+				// Value of midpoint is calculated by averagint the four corner values, plus a random
+				// amount
+				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
+					+ ((m_pHeightMap[nP1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
+
+				fMinH = min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
 			}
 		}
 		
 		// Square stage
-		for (z = 0; z < m_nSize; ++z)
+		for (z = 0; z < m_nSize; z += w)
 		{
-			for (x = 0; x < m_nSize; ++x)
+			for (x = 0; x < m_nSize; x += w)
 			{
-			
+				nP1 = GetHeightIndexAt(x, z);
+				nP2 = GetHeightIndexAt(x + w, z);
+				nP3 = GetHeightIndexAt(x + w/2, z - w/2);
+				nP4 = GetHeightIndexAt(x + w/2, z + w/2);
+				nPmid = GetHeightIndexAt(x + w/2, z);
+
+				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
+					+ ((m_pHeightMap[nP1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
+
+				fMinH = min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
+
+				nP1 = GetHeightIndexAt(x, z);
+				nP2 = GetHeightIndexAt(x, z + w);
+				nP3 = GetHeightIndexAt(x + w/2, z + w/2);
+				nP4 = GetHeightIndexAt(x - w/2, z + w/2);
+				nPmid = GetHeightIndexAt(x, z + w/2);
+
+				m_pHeightMap[nPmid] = RandomInRange(-dH, dH) 
+					+ ((m_pHeightMap[p1] + m_pHeightMap[nP2] + m_pHeightMap[nP3] + m_pHeightMap[nP4]) * 0.25f);
+
+				fMinH = min(fMinH, m_pHeightMap[nPmid]);
+                fMaxH = max(fMaxH, m_pHeightMap[nPmid]);
 			}
 		}
 	}
+
+	// Normalize height field so altitudes fall into range [0,255].
+    for (int i = 0; i < m_nSize * m_nSize; ++i)
+        m_pHeightMap[i] = 255.0f * (m_pHeightMap[i] - fMinH) / (fMaxH - fMinH);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
