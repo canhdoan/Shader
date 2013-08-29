@@ -25,6 +25,7 @@ extern float rotation_y_increment;
 extern float rotation_z;
 extern float rotation_z_increment;
 extern float g_fAngle;
+extern float g_lightDir[];
 
 #endif // APP_PACKAGE_H
 

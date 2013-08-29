@@ -45,6 +45,10 @@ using namespace glm;
 
 #define PI 3.141592653589793
 #define TWOPI 6.2831853071795862
+#define HEIGHTMAP_SIZE 				128
+#define HEIGHTMAP_GRID_SPACING		16
+#define HEIGHTMAP_SCALE				2.0f
+#define TERRAIN_REGIONS_COUNT		4
 
 ///////////////////////////////////////////////////////////////////////////////
 // Structure defination

@@ -62,6 +62,11 @@ private:
 	 */
 	bool GenerateVertices(void);
 
+	/**
+	 * Update shader pramameters
+	 */
+	void UpdateShaderParameters(void);
+
 
 private:
 	// Vertex buffer object
@@ -73,6 +78,8 @@ private:
 	int 				m_nTotalIndices;
 	// Height map object
 	HeightMap 			*m_pHeightMap;
+	// Shader program
+	Shader 				*m_pShader;
 };
 
 
